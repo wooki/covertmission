@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $.backstretch("/img/rebel-alliance.jpg");
+    $.backstretch("/img/rebels-bg.jpg");
 });
