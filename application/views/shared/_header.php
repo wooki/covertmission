@@ -11,19 +11,3 @@
 
 <body>
 
-<div class="navbar navbar-fixed-bottom">
-    <div class="navbar-inner">
-        
-        <div class="container">
-            
-            <a class="brand" href="/">Covert Mission</a>
-            
-            <ul class="nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
-            </ul>
-        
-        </div>
-    </div>
-</div>
