@@ -25,8 +25,11 @@ class Games extends CI_Controller {
     public function lobby($slug) {
     	
         // load the game
-        $this->load->model('game');
-        $game = Game::load($slug);
+        $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
+        $game = Game::load($slug, $games_list);
+        
         if ($game == false) {
             $this->session->set_flashdata('error', 'Lobby does not exist');
             echo "Game not found: ".$slug;
@@ -63,6 +66,8 @@ class Games extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="alert alert-error">', '</div>');
         $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
         
         if ($this->input->post('postback') === false) {
             $game = Game::create('', '');
@@ -82,14 +87,7 @@ class Games extends CI_Controller {
                 $this->session->set_userdata('player_id', $guid);
                 
                 // save the game and redirect to the game lobby
-                if (Game::save($game) == true) {
-                    
-                    // update game list to prevent default game names
-                    $games_list = new Game_List();
-                    $games_list->load();
-                    $games_list->update_game($game->name, $game->slug, $game->state);
-                    $games_list->save();
-                    
+                if (Game::save($game, $games_list) == true) {
                     redirect('/games/lobby/'.$game->slug, 'location');                    
                 } else {
                     $this->_render_form($game, 'Error Saving Game');  

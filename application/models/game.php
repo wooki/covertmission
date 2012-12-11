@@ -8,19 +8,13 @@ class Game {
     var $players = array();
     
     // load from disc, from json file
-    static function load($slug) {
-        $json_data = read_file('./data/game-'.$slug.'.json');
-        if ($json_data != false) {
-            return json_decode($json_data);
-        } else {
-            return false;
-        }
+    static function load($slug, $game_list) {
+        return $game_list->get_game($slug);        
     }
 
     // save to disc, as json
-    static function save($game) {
-        $json_data = json_encode($game);
-        return write_file('./data/game-'.$game->slug.'.json', $json_data);
+    static function save($game, $game_list) {
+        return $game_list->update_game($game);
     }
 
     // create a new game
