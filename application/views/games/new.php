@@ -6,7 +6,7 @@
             <h1>Create game</h1>
         </div>
         
-        <div class="span4 offset 4">
+        <div class="span4 offset4">
             <?= validation_errors() ?>
             <?= form_open('games/create') ?>
                 <?= form_hidden('postback', '1'); ?>                    
