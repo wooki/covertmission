@@ -34,7 +34,7 @@ class Game {
     }
     
     // gets the player data for the specified guid, returns false if not found
-    static function get_player($guid) {
+    static function get_player($game, $guid) {
         foreach ($game->players as $player) {
             if ($player->guid == $guid) {
                 return $player;
