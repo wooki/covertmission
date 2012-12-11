@@ -16,7 +16,8 @@ class Games extends CI_Controller {
     
     public function create() {
         
-        $this->load->helper(array('form', 'form_validation'));
+        $this->load->helper('form');
+        $this->load->library('form_validation');
         $this->load->model(array('game_list', 'game'));
         
         if ($this->input->post('postback') === false) {
