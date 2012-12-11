@@ -5,19 +5,20 @@ class Game_List {
     var $games_list_file_path = './data/games.json';
     
     // load from disc, from json file
-    function load() {
+    function load() {        
         
         // check for file - and create an empty file if one doesn't exist
         $json_data = read_file($this->games_list_file_path);
         if ($json_data != false) {
             $this->games = json_decode($json_data);
         }
+        return true;
     }
 
     // save to disc, as json
     function save() {
         $json_data = json_encode($this->games);
-        write_file($this->games_list_file_path, $json_data);
+        return write_file($this->games_list_file_path, $json_data);
     }    
     
     function update_game($game) {
@@ -31,6 +32,7 @@ class Game_List {
         if ($updated == false) {
             $this->games[] = $game;
         }
+        return this->save();
     }
     
     // get the specified game
