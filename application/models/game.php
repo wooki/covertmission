@@ -7,8 +7,7 @@ class Game {
     var $admin_name = '';
     
     // load from disc, from json file
-    static function load($slug) {
-        $ci =& get_instance();
+    static function load($slug, $ci) {
         $ci->load->helper('file');
         $json_data = $ci->file->read_file('./data/game-'.$slug.'.json');
         if ($json_data != false) {
@@ -19,8 +18,7 @@ class Game {
     }
 
     // save to disc, as json
-    static function save($game) {
-        $ci =& get_instance();
+    static function save($game, $ci) {
         $ci->load->helper('file');
         $json_data = json_encode($game);
         return $ci->file->write_file('./data/game-'.$game->slug.'.json', $json_data);
