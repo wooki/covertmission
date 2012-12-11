@@ -3,6 +3,7 @@ class Games extends CI_Controller {
 
     public function index() {
     	
+        $this->load->model('game_list');       
         $games_list = new Game_List();
         $games_list->load();
                     
