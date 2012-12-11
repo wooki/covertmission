@@ -21,7 +21,7 @@ class Games extends CI_Controller {
         $this->load->model(array('game_list', 'game'));
         
         if ($this->input->post('postback') === false) {
-            $game = Game::create('', '');
+            $game = Game::create('');
             $this->_render_form($game);
         } else {
             $game = Game::create($this->input->post('name'), $this->input->post('admin_name'));

@@ -32,6 +32,7 @@ class Game {
         $g->name = $name;
         $g->slug = Game::generate_slug($g->name);
         $g->state = "joining";        
+        return $g;
     }
     
     // generate a slug for the game
