@@ -3,9 +3,13 @@ class Homepage extends CI_Controller {
 
     public function index() {
 		
+        // look for flash messages
+        $error = $this->session->flashdata('error');
+            
         $this->view_data = array(
             'title' => 'Covert Mission - Group game with a star wars theme',
-            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.'
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'error' => $error
         );
         
         $this->load->view('shared/_header.php', $this->view_data);

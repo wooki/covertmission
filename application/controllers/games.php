@@ -17,14 +17,22 @@ class Games extends CI_Controller {
     public function lobby($slug) {
     	
         // load the game
-        
+        $this->load->model('game');
+        $game = Game::load($slug);
+        if ($game == false) {
+            $this->session->set_flashdata('error', 'Lobby does not exist');
+            redirect('/', 'location'); 
+            return;
+        }
+            
         $this->view_data = array(
-            'title' => $slug.'Joinable Games - Covert Mission - Group game with a star wars theme',
-            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.'
+            'title' => $game->name.' Lobby - Covert Mission - Group game with a star wars theme',
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'game' => $game            
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
-        $this->load->view('games/index', $this->view_data);
+        $this->load->view('games/lobby', $this->view_data);
         $this->load->view('shared/_footer.php', $this->view_data);
         
 	}
