@@ -41,7 +41,7 @@ class Game_List {
         $exists = false;
         foreach ($this->games as $game) {
             if ($slug == $game->slug) {
-                return game;
+                return $game;
             }
         }
         return false;

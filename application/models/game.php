@@ -40,7 +40,7 @@ class Game {
     // add a player to the game, returning a random guid for mapping
     // that players requests to this player in the game
     static function add_player($game, $name) {
-        $name_slug = Game::generate_slug($game->name);
+        $name_slug = Game::generate_slug($name);
         $ok = true;
         foreach ($game->players as $player) {
             if ($player->slug == $name_slug) {
