@@ -17,6 +17,7 @@
                     <label>Player Name</label>
                     <?= form_input('admin_name', $game->admin_name); ?>
                     
+                    <br />
                     <button type="submit" class="btn btn-primary btn-large">Create</button>
                 </fieldset>
             </form>

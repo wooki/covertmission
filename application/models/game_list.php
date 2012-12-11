@@ -10,7 +10,7 @@ class Game_List {
         // check for file - and create an empty file if one doesn't exist
         $ci =& get_instance();
         $ci->load->helper('file');
-        $json_data = $ci->file->read_file($games_list_file_path);
+        $json_data = $ci->file->read_file($this->games_list_file_path);
         if ($json_data != false) {
             $this->games = json_decode($json_data);
         }
@@ -21,7 +21,7 @@ class Game_List {
         $ci =& get_instance();
         $ci->load->helper('file');
         $json_data = json_encode($this->games);
-        $ci->file->write_file($games_list_file_path, $json_data);
+        $ci->file->write_file($this->games_list_file_path, $json_data);
     }    
     
     
