@@ -43,7 +43,7 @@ class Games extends CI_Controller {
     public function gamename_check($name) {
         $this->load->model(array('game_list', 'game'));
         $slug = Game::generate_slug($name);
-        $games_list = Game_List::load($this);
+        $games_list = Game_List::load();
         $game_exists = $games_list->game_exists($name, $slug);
         return !$game_exists;
     }

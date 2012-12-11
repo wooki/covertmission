@@ -7,9 +7,8 @@ class Game {
     var $admin_name = '';
     
     // load from disc, from json file
-    static function load($slug, $ci) {
-        $ci->load->helper('file');
-        $json_data = $ci->file->read_file('./data/game-'.$slug.'.json');
+    static function load($slug) {
+        $json_data = read_file('./data/game-'.$slug.'.json');
         if ($json_data != false) {
             return json_decode($json_data);
         } else {
@@ -18,10 +17,9 @@ class Game {
     }
 
     // save to disc, as json
-    static function save($game, $ci) {
-        $ci->load->helper('file');
+    static function save($game) {
         $json_data = json_encode($game);
-        return $ci->file->write_file('./data/game-'.$game->slug.'.json', $json_data);
+        return write_file('./data/game-'.$game->slug.'.json', $json_data);
     }
 
     // create a new game
