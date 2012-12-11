@@ -34,7 +34,7 @@
             <h4>Players in game</h4>
             
             <?php foreach ($game->players as $p) { ?>
-            <span class="label label-important"><i class="icon-user"></i><?= $p->name ?></span>
+            <span class="label label-info"><i class="icon-user icon-white"></i><?= $p->name ?></span>
             <?php } ?>
             
         </div>
