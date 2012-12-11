@@ -2,9 +2,24 @@
 class Games extends CI_Controller {
 
     public function index() {
-		
+    	
         $this->view_data = array(
             'title' => 'Joinable Games - Covert Mission - Group game with a star wars theme',
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.'
+        );
+        
+        $this->load->view('shared/_header.php', $this->view_data);
+        $this->load->view('games/index', $this->view_data);
+        $this->load->view('shared/_footer.php', $this->view_data);
+        
+	}
+    
+    public function lobby($slug) {
+    	
+        // load the game
+        
+        $this->view_data = array(
+            'title' => $slug.'Joinable Games - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.'
         );
         
@@ -26,14 +41,22 @@ class Games extends CI_Controller {
         } else {
             $game = Game::create($this->input->post('name'), $this->input->post('admin_name'));
                 
-            $this->form_validation->set_rules('name', 'Name', 'required');
-            $this->form_validation->set_rules('name', 'Name', 'callback_gamename_check');
-            $this->form_validation->set_rules('admin_name', 'admin_name', 'required');
+            $this->form_validation->set_rules('name', 'Game Name', 'required');
+            $this->form_validation->set_rules('name', 'Game Name', 'callback_gamename_check');
+            $this->form_validation->set_rules('admin_name', 'Player Name', 'required');
             
             if ($this->form_validation->run() == FALSE) {
                 $this->_render_form($game);    
             } else {
-                redirect('/', 'location');
+                
+                // save the game and redirect to the game lobby
+                if (Game::save($game) == true) {
+                    redirect('/lobby/'.$game->slug, 'location');                    
+                } else {
+                    $this->form_validation->set_message('name', 'Error Saving Game');
+                    $this->_render_form($game);  
+                }                
+                
             }
         }
         
@@ -46,6 +69,9 @@ class Games extends CI_Controller {
         $games_list = new Game_List();
         $games_list->load();
         $game_exists = $games_list->game_exists($name, $slug);
+        if ($game_exists) {
+            $this->form_validation->set_message('gamename_check', 'The %s is already in use');    		
+        }
         return !$game_exists;
     }
     
