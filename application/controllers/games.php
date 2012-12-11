@@ -66,11 +66,7 @@ class Games extends CI_Controller {
     public function gamename_check($name) {
         $this->load->model(array('game_list', 'game'));
         $slug = Game::generate_slug($name);
-        if ($name == '') {
-            $this->form_validation->set_message('gamename_check', '%s is invalid');            
-            return false;
-        }
-        if ($slug == '') {
+        if ($name != '' && $slug == '') {
             $this->form_validation->set_message('gamename_check', '%s is invalid');            
             return false;
         }
