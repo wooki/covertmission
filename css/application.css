@@ -2,7 +2,7 @@ h1, h2, h3, h4, .brand {
     font-family: 'Exo', sans-serif;
 }
 
-h1 {
+.span12 h1, .span12 h2, .span12 h3, .span12 h4 {
     text-align: center;
 }
 

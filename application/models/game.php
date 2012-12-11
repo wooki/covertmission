@@ -5,6 +5,7 @@ class Game {
     var $name = '';
     var $state = '';
     var $admin_name = '';
+    var $players = array();
     
     // load from disc, from json file
     static function load($slug) {
@@ -30,6 +31,40 @@ class Game {
         $g->slug = Game::generate_slug($g->name);
         $g->state = "joining";        
         return $g;
+    }
+    
+    // gets the player data for the specified guid, returns false if not found
+    static function get_player($guid) {
+        foreach ($game->players as $player) {
+            if ($player->guid == $guid) {
+                return $player;
+            }
+        }
+        return false;
+    }
+    
+    // add a player to the game, returning a random guid for mapping
+    // that players requests to this player in the game
+    static function add_player($game, $name) {
+        $name_slug = Game::generate_slug($g->name);
+        $ok = true;
+        foreach ($game->players as $player) {
+            if ($player->slug == $name_slug) {
+                $ok = false;
+            }
+        }
+        if ($ok == false) {
+            return false;
+        } else {
+            $guid = random_string('alnum', 16);
+            $game->players[] = array(
+                'name' => $name,
+                'slug' => $name_slug,
+                'guid' => $guid,
+                'role' => ''
+            );
+            return $guid;
+        }
     }
     
     // generate a slug for the game

@@ -24,11 +24,21 @@ class Games extends CI_Controller {
             redirect('/', 'location'); 
             return;
         }
-            
+        
+        // get the player
+        $guid = $this->session->userdata('player_id');
+        $player = Game::get_player($guid);
+        if ($player == false) {
+            $this->session->set_flashdata('error', 'You are not a player in that game');
+            redirect('/', 'location'); 
+            return;
+        }
+        
         $this->view_data = array(
             'title' => $game->name.' Lobby - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
-            'game' => $game            
+            'game' => $game,
+            'player' => $player
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -58,12 +68,19 @@ class Games extends CI_Controller {
                 $this->_render_form($game);    
             } else {
                 
+                // add the admins player and save the guid to the players session
+                $guid = Game::add_player($game, $game->admin_name);
+                $this->session->set_userdata('player_id', $guid);
+                
                 // save the game and redirect to the game lobby
                 if (Game::save($game) == true) {
+                    
+                    // update game list to prevent default game names
                     $games_list = new Game_List();
                     $games_list->load();
                     $games_list->update_game($game->name, $game->slug, $game->state);
                     $games_list->save();
+                    
                     redirect('/games/lobby/'.$game->slug, 'location');                    
                 } else {
                     $this->_render_form($game, 'Error Saving Game');  
