@@ -62,8 +62,8 @@ class Games extends CI_Controller {
         } else {
             $game = Game::create($this->input->post('name'), $this->input->post('admin_name'));
                 
-            $this->form_validation->set_rules('name', 'Game Name', 'required');
-            $this->form_validation->set_rules('gamename_check', 'Game Name', 'callback_gamename_check');
+            //$this->form_validation->set_rules('name', 'Game Name', 'required');
+            $this->form_validation->set_rules('name', 'Game Name', 'callback_gamename_check');
             $this->form_validation->set_rules('admin_name', 'Player Name', 'required');
             
             if ($this->form_validation->run() == FALSE) {
