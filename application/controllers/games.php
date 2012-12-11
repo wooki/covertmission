@@ -18,7 +18,7 @@ class Games extends CI_Controller {
         
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->load->model(array('game_list', 'game'));
+        $this->load->model(array('gamelist', 'game'));
         
         if ($this->input->post('postback') === false) {
             $game = Game::create('', '');
@@ -41,7 +41,7 @@ class Games extends CI_Controller {
     }
     
     public function gamename_check($name) {
-        $this->load->model(array('game_list', 'game'));
+        $this->load->model(array('gamelist', 'game'));
         $slug = Game::generate_slug($name);
         $game_exists = GameList::game_exists($name, $slug);
         return !$game_exists;
