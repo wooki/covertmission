@@ -23,9 +23,10 @@ class Game {
     }
 
     // create a new game
-    static function create($name) {
+    static function create($name, $admin_name) {
         $g = new Game();
         $g->name = $name;
+        $g->admin_name = $admin_name;
         $g->slug = Game::generate_slug($g->name);
         $g->state = "joining";        
         return $g;

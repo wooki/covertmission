@@ -42,7 +42,7 @@ class Games extends CI_Controller {
             $game = Game::create($this->input->post('name'), $this->input->post('admin_name'));
                 
             $this->form_validation->set_rules('name', 'Game Name', 'required');
-            $this->form_validation->set_rules('name', 'Game Name', 'callback_gamename_check');
+            $this->form_validation->set_rules('gamename_check', 'Game Name', 'callback_gamename_check');
             $this->form_validation->set_rules('admin_name', 'Player Name', 'required');
             
             if ($this->form_validation->run() == FALSE) {
@@ -66,11 +66,19 @@ class Games extends CI_Controller {
     public function gamename_check($name) {
         $this->load->model(array('game_list', 'game'));
         $slug = Game::generate_slug($name);
+        if ($name == '') {
+            $this->form_validation->set_message('gamename_check', '%s is invalid');            
+            return false;
+        }
+        if ($slug == '') {
+            $this->form_validation->set_message('gamename_check', '%s is invalid');            
+            return false;
+        }
         $games_list = new Game_List();
         $games_list->load();
         $game_exists = $games_list->game_exists($name, $slug);
         if ($game_exists) {
-            $this->form_validation->set_message('gamename_check', 'The %s is already in use');    		
+            $this->form_validation->set_message('gamename_check', '%s is already in use');    		
         }
         return !$game_exists;
     }
