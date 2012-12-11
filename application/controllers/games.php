@@ -33,6 +33,7 @@ class Games extends CI_Controller {
         
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-error">', '</div>');
         $this->load->model(array('game_list', 'game'));
         
         if ($this->input->post('postback') === false) {
@@ -53,8 +54,7 @@ class Games extends CI_Controller {
                 if (Game::save($game) == true) {
                     redirect('/lobby/'.$game->slug, 'location');                    
                 } else {
-                    $this->form_validation->set_message('name', 'Error Saving Game');
-                    $this->_render_form($game);  
+                    $this->_render_form($game, 'Error Saving Game');  
                 }                
                 
             }
@@ -80,8 +80,9 @@ class Games extends CI_Controller {
     }
     
     
-    public function _render_form($game) {
+    public function _render_form($game, $message=false) {
         $this->view_data = array(
+            'message' => $message,
             'game' => $game,
             'title' => 'New Game - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.'
