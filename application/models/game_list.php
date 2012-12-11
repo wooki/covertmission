@@ -32,7 +32,7 @@ class Game_List {
         if ($updated == false) {
             $this->games[] = $game;
         }
-        return this->save();
+        return $this->save();
     }
     
     // get the specified game
