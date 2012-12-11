@@ -5,6 +5,7 @@
         <div class="span12">
             <h1>Create game</h1>
             <?= form_open('games/create') ?>
+                <?= form_hidden('postback', '1'); ?>                    
                 <fieldset>
                     <label>Game Name</label>
                     <?= form_input('name', $game->name); ?>
