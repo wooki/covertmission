@@ -1,5 +1,5 @@
 <?php
-class GameList {
+class Game_List {
     
     var $games = array();
     var $games_list_file_path = './data/games.json';
