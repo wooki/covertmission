@@ -37,7 +37,7 @@ class Games extends CI_Controller {
         $this->load->model(array('game_list', 'game'));
         
         if ($this->input->post('postback') === false) {
-            $game = Game::create('');
+            $game = Game::create('', '');
             $this->_render_form($game);
         } else {
             $game = Game::create($this->input->post('name'), $this->input->post('admin_name'));
@@ -52,7 +52,11 @@ class Games extends CI_Controller {
                 
                 // save the game and redirect to the game lobby
                 if (Game::save($game) == true) {
-                    redirect('/lobby/'.$game->slug, 'location');                    
+                    $games_list = new Game_List();
+                    $games_list->load();
+                    $games_list->update_game($game->name, $game->slug, $game->state);
+                    $games_list->save();
+                    redirect('/games/lobby/'.$game->slug, 'location');                    
                 } else {
                     $this->_render_form($game, 'Error Saving Game');  
                 }                

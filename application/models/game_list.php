@@ -20,9 +20,26 @@ class Game_List {
         write_file($this->games_list_file_path, $json_data);
     }    
     
+    function update_game($name, $slug, $state) {
+        $updated = false;
+        foreach ($this->games as &$game) {
+            if ($slug == $game->slug) {
+                $updated = true;
+                $game->state = $state;
+            }
+        }
+        if ($updated == false) {
+            $this->games[] = array(
+              'name' => $name,
+              'slug' => $slug,
+              'state' => $state              
+            );
+        }
+    }
     
     // check if the specified item exists in the collection
     function game_exists($name, $slug) {
+    
         $exists = false;
         foreach ($this->games as $game) {
             if ($name == $game->name ||
