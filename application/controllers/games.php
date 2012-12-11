@@ -22,8 +22,65 @@ class Games extends CI_Controller {
         
 	}
     
+    public function join($slug) {
+        
+        // load the game
+        $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
+        $game = Game::load($slug, $games_list);
+        
+        if ($game == false) {
+            $this->session->set_flashdata('error', 'Game does not exist');
+            echo "Game not found: ".$slug;
+            //redirect('/', 'location'); 
+            return;
+        }
+        
+        // get the player
+        $guid = $this->session->userdata('player_id');
+        $player = Game::get_player($game, $guid);
+        if ($player != false) {
+            // already in this game - so just go to the correct action            
+            $this->_redirect_existing_player($game);
+            return;
+        }
+
+        $player_name = '';
+        if ($this->input->post('postback') === true) {
+            
+            $player_name = $this->input->post('player_name');
+                
+            $this->form_validation->set_rules('player_name', 'Player Name', 'required');            
+            if ($this->form_validation->run() == true) {
+
+                // add player and jump into game
+                if (Game::add_player($game, $player_name) == true) {
+                
+                    $this->_redirect_existing_player($game);
+                    return;                
+                } else {
+                    echo "DUPLICATE PLAYER NAME";
+                }
+            }
+        }
+        
+        $this->view_data = array(
+            'title' => 'Join '.$game->name.' - Covert Mission - Group game with a star wars theme',
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'game' => $game,
+            'player_name' => $player_name
+        );
+        
+        $this->load->view('shared/_header.php', $this->view_data);
+        $this->load->view('games/join', $this->view_data);
+        $this->load->view('shared/_footer.php', $this->view_data);
+                
+	}
+    
+    
     public function lobby($slug) {
-    	
+        
         // load the game
         $this->load->model(array('game_list', 'game'));
         $games_list = new Game_List();
@@ -98,7 +155,7 @@ class Games extends CI_Controller {
         
         
     }
-    
+        
     public function gamename_check($name) {
         $this->load->model(array('game_list', 'game'));
         $slug = Game::generate_slug($name);
@@ -119,6 +176,14 @@ class Games extends CI_Controller {
         return !$game_exists;
     }
     
+    public function _redirect_existing_player($game) {
+        if ($game->state == 'joining') {
+            redirect('/games/lobby/'.$game->slug, 'location'); 
+        } else {
+            $this->session->set_flashdata('error', 'Cannot rejoin - unknown state: '.$game->state);
+            redirect('/', 'location'); 
+        }
+    }
     
     public function _render_form($game, $message=false) {
         $this->view_data = array(
