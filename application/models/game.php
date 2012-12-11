@@ -19,8 +19,6 @@ class Game {
     // save to disc, as json
     static function save($game) {
         $json_data = json_encode($game);
-        echo $json_data;
-        echo '<br /><br />'.'./data/game-'.$game->slug.'.json';
         return write_file('./data/game-'.$game->slug.'.json', $json_data);
     }
 
