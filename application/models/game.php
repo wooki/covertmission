@@ -7,7 +7,7 @@ class Game {
     var $admin_name = '';
     
     // load from disc, from json file
-    function static load($slug) {
+    static function load($slug) {
         $ci =& get_instance();
         $ci->load->helper('file');
         $json_data = $ci->file->read_file('./data/game-'.$slug.'.json');
@@ -19,7 +19,7 @@ class Game {
     }
 
     // save to disc, as json
-    function static save($game) {
+    static function save($game) {
         $ci =& get_instance();
         $ci->load->helper('file');
         $json_data = json_encode($game);
@@ -27,7 +27,7 @@ class Game {
     }
 
     // create a new game
-    function static create($name) {
+    static function create($name) {
         $g = new Game();
         $g->name = $name;
         $g->slug = Game::generate_slug($g->name);
@@ -35,7 +35,7 @@ class Game {
     }
     
     // generate a slug for the game
-    function static generate_slug($name) {
+    static function generate_slug($name) {
         $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
         return $slug;        
     }
