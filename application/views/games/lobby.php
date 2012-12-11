@@ -11,15 +11,34 @@
             
             <p class="alert alert-info game_state">Waiting to start</p>
             
-            <p>The admin can start the time as soon as there are five or more 
+            <p>The admin can start the game as soon as there are five or more 
             players.  Each player will then be given a secret role - either
-            an Imperial Officer or as a Rebel Alliance Spy.</p>
+            an <strong>Imperial Officer</strong> or as a <strong>Rebel Alliance 
+            Spy</strong>. Keep your role secret!</p>
             
-            <p><strong>Keep your role secret!</strong></p>
+            <?php 
+            if ($game->admin_name == $player->name) { 
+                if (count($game->players) >= 5 ) {  ?>
             
-            <?php if ($game->admin_name == $player->name) { ?>
-                <p>ADMIN START GAME CONTROLS GO HERE</p>
+            <?= form_open('games/start') ?>
+                <fieldset>
+                    <button type="submit" class="btn btn-primary btn-large">Start</button>
+                </fieldset>
+            </form>
+            
+            <?php } else { ?>
+            <p>Waiting for five or more players.</p>
+            <?php }
+            } ?>
+            
+            <h4>Players in game</h4>
+            
+            <ul>
+            <?php foreach ($game->players as $p) { ?>
+            <li><?= $p->name ?></li>
             <?php } ?>
+            </ul>
+            
         </div>
         
     </div>
