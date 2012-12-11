@@ -12,9 +12,11 @@
     <div class="row">
     
         <div class="span12 game-cmd">
-            <?php foreach($games as $game) { ?>
+            <?php foreach($games as $game) { 
+                if ($game->state == 'joining') { ?>
             <a class="btn btn-primary btn-large" href="/"><?= $game->name ?></a>
-            <?php } ?>
+            <?php }
+            } ?>
         </div>
                 
     </div>
