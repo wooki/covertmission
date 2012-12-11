@@ -6,7 +6,9 @@ class Games extends CI_Controller {
         $this->load->model(array('game_list', 'game'));
         $games_list = new Game_List();
         $games_list->load();
-                    
+        
+        $guid = $this->session->userdata('player_id');
+        
         $this->view_data = array(
             'title' => 'Joinable Games - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
