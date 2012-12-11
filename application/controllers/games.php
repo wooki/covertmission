@@ -21,7 +21,8 @@ class Games extends CI_Controller {
         $game = Game::load($slug);
         if ($game == false) {
             $this->session->set_flashdata('error', 'Lobby does not exist');
-            redirect('/', 'location'); 
+            echo "Game not found: ".$slug;
+            //redirect('/', 'location'); 
             return;
         }
         
@@ -30,7 +31,8 @@ class Games extends CI_Controller {
         $player = Game::get_player($guid);
         if ($player == false) {
             $this->session->set_flashdata('error', 'You are not a player in that game');
-            redirect('/', 'location'); 
+            echo "No player: ".$guid;
+            //redirect('/', 'location'); 
             return;
         }
         
