@@ -9,15 +9,14 @@ $(document).ready(function() {
         // <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
         setInterval(function() {
             
-            $('.game_state').prepend('<i class="icon-refresh"></i>');
-            
             $.ajax({
                url: '/api/state/test',
                error: function(xhr, textStatus, error) {
                    $('.game_state').html('Error: '+textStatus);
                },
                success: function(data, textStatus, xhr) {
-                   $('.game_state').html('Success: '+textStatus+' : '+data);                   
+                   var json_data = json_decode($data);
+                   $('.game_state').html(json_data['return']);                   
                }
             });
             
