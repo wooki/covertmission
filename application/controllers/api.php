@@ -24,7 +24,7 @@ class Api extends CI_Controller {
             // special case to ensure players have to manually move past
             // the role assignment page
             if ($game->state == "starting" &&
-                Game::all_players_state($game, 'joining') == true) {
+                Game::all_players_state($game, 'joining') == false) {
                 $game_url = '';
             }
             
