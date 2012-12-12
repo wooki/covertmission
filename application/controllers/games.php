@@ -60,7 +60,7 @@ class Games extends CI_Controller {
 
                 // add player and jump into game
                 if (Game::add_player($game, $player_name) == true) {
-                    if (Game::save($game, $game_list) == true) {
+                    if (Game::save($game, $games_list) == true) {
                         $this->_redirect_existing_player($game);
                         return;                
                     } else {
