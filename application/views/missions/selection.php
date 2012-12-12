@@ -14,7 +14,7 @@
             <p>Mission leader is: <?= player_label($leader->name) ?></p>
             <p><?= print_r($player, true) ?></p>
             <p><?= print_r($leader, true) ?></p>
-            <?php if ($player->leader == true) { ?>            
+            <?php if ($player->leader === true) { ?>            
             <?= form_open('missions/selection/'.$game->slug) ?>
                 <fieldset>
                     <button type="submit" class="btn btn-primary btn-large">Set Team</button>

@@ -94,7 +94,7 @@ class Game {
     // get leader
     static function get_leader($game) {
         foreach ($game->players as $player) {
-            if ($player->leader == true) {
+            if ($player->leader === true) {
                 return $player;
             }
         }
