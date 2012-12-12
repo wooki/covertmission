@@ -109,6 +109,7 @@ class Game {
                 $p['leader'] = $player->leader;
                 $p['role'] = $player->role;
                 $p['state'] = $player->state;
+echo $player->state;                
             }
         }
     }
