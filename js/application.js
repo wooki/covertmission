@@ -41,7 +41,7 @@ var covertmission = function() {
                            window.location.reload();
                        } else {
                            // if the url is different from current then redirect
-                           $('.game_state').html(json_data['url']);
+                           $('.game_state').html(window.location+' or '+json_data['url']);
                        }
                    }
                 });
