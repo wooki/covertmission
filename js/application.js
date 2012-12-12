@@ -9,6 +9,8 @@ $(document).ready(function() {
         // <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
         setInterval(function() {
             
+            $('.game_state').prepend('<i class="icon-refresh"></i>');
+            
             $.ajax({
                url: '/api/state/test',
                error: function(xhr, textStatus, error) {
