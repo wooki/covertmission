@@ -4,7 +4,7 @@
     
         <div class="span12">
             <h1><?= $game->name ?> Lobby</h1>
-            <h4>Playing as <?= $player->name ?></h4>            
+            <h4 class="player" data-slug="<?= $player->slug ?>" data-admin="<?= $game->admin_name ?>">Playing as <?= $player->name ?></h4>            
         </div>
         
         <div class="span4 offset4">
@@ -16,6 +16,7 @@
             an <strong>Imperial Officer</strong> or as a <strong>Rebel Alliance 
             Spy</strong>. Keep your role secret!</p>
             
+            <div class="admin_controls">
             <?php 
             if ($game->admin_name == $player->name) { 
                 if (count($game->players) >= 5 ) {  ?>
@@ -30,6 +31,7 @@
             <p>Waiting for five or more players.</p>
             <?php }
             } ?>
+            </div>
             
             <h4>Players in game</h4>
             
