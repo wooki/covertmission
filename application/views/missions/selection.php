@@ -22,7 +22,7 @@
                     <div class="padding">
                     
                         <?php foreach ($game->players as $p) { ?>
-                        <button type="button" class="btn btn-large" data-toggle="button"><i class="icon-user"></i> <?= $p->name ?></button>
+                        <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button"><i class="icon-user"></i> <?= $p->name ?></button>
                         <?php } ?>
                         
                         <p>&nbsp;</p>
