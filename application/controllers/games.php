@@ -55,25 +55,21 @@ class Games extends CI_Controller {
         if ($this->input->post('postback') === '1') {
 
             $player_name = $this->input->post('player_name');
-echo "name: ".$player_name."<br />";                
             $this->form_validation->set_rules('player_name', 'Player Name', 'required');            
             if ($this->form_validation->run() == true) {
 
-echo "VALID<br />";                
                 // add player and jump into game
                 if (Game::add_player($game, $player_name) == true) {
-                
-                    $this->_redirect_existing_player($game);
-                    return;                
+                    if (Game::save($game, $game_list) == true) {
+                        $this->_redirect_existing_player($game);
+                        return;                
+                    } else {
+                        $message = "Error saving game";
+                    }
                 } else {
-echo "DUPE<br />";                
-                    $message = "DUPLICATE PLAYER NAME";
+                    $message = "A player with that name is already playing this game";
                 }
-            } else {
-echo "INVALID<br />";                
             }
-        } else {
-echo "NO POSTBACK<br />";                
         }
         
         $this->view_data = array(
