@@ -16,6 +16,7 @@
             <?php if ($player->leader === true) { ?>            
             <?= form_open('missions/selection/'.$game->slug) ?>
                 <fieldset>
+                    <p>Discuss and select your team:</p>
                     <div class="btn-group" data-toggle="buttons-checkbox">
                         <?php foreach ($game->players as $p) { ?>
                         <button type="button" class="btn  btn-large"><i class="icon-user"></i><?= $p->name ?></button>
