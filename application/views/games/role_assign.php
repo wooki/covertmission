@@ -9,7 +9,7 @@
         
         <div class="span4 offset4">
             
-            <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
+            <p data-game-state="joining" class="alert alert-info game_state">Starting game</p>
             
             <p>You are playing as a<?php if ($player->role == "Imperial Officer") { echo 'n';  } ?> <strong><?= $player->role ?></strong>. You
             must complete 3 our of the 5 missions that you will be set to win the game.</p>

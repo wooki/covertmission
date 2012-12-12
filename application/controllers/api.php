@@ -18,7 +18,7 @@ class Api extends CI_Controller {
             
             $game_url = Game::get_url($game);
             if ($game_url == false) {
-                $game_url = 'jquery ';
+                $game_url = '';
             }
             echo json_encode(array(
                                 'return' => $game->state,

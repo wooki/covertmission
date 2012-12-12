@@ -36,9 +36,12 @@ var covertmission = function() {
                        });
                        $('.players').html(player_html);
                        
-                       // if we are admin and have enough players refresh lobby page
+                       // if we are admin and have enough players refresh lobby page - to reveal the start button
                        if ($('.admin_controls_waiting').length && $(json_data['players']).length >= 5) {
                            window.location.reload();
+                       } else {
+                           // if the url is different from current then redirect
+                           $('.game_state').html(json_data['url']);
                        }
                    }
                 });
