@@ -31,7 +31,6 @@
             <p class="admin_controls_waiting">Waiting for five or more players.</p>
             </div>
             <?php } ?>
-            </div>
             <?php } ?>
             
             <h4>Players in game</h4>

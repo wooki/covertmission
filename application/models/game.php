@@ -7,6 +7,7 @@ class Game {
     var $admin_name = '';
     var $players = array();
     var $current_mission = false;
+    var $current_team = false;
     
     // work out the correct url for viewing this game
     static function get_url($game) {

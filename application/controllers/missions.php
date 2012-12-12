@@ -41,6 +41,7 @@ class Missions extends CI_Controller {
         // when the first person hits this page set the mission index
         if ($game->current_mission = false) {
             $game->current_mission = 0;                        
+            $game->current_team = 0;
         }
         
         // when the last player reaches this point update game status
