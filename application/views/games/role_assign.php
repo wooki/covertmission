@@ -9,7 +9,7 @@
         
         <div class="span4 offset4">
             
-            <p data-game-state="joining" class="alert alert-info game_state">Starting game</p>
+            <p data-game-state="starting" class="alert alert-info game_state">Starting game</p>
             
             <p>You are playing as a<?php if ($player->role == "Imperial Officer") { echo 'n';  } ?>
             <strong><?= player_role($player->role) ?></strong>. You
@@ -26,7 +26,7 @@
             
             <p>Note that five rejected teams in a row will automatically lead to a win to the Rebel Spies.</p>
             
-            <?= form_open('mission/selection/'.$game->slug) ?>
+            <?= form_open('missions/selection/'.$game->slug) ?>
                 <fieldset>
                     <button type="submit" class="btn btn-primary btn-large">Start Mission Selection</button>
                 </fieldset>

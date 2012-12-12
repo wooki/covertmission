@@ -38,7 +38,7 @@
             
             <div class="players">
             <?php foreach ($game->players as $p) { ?>
-            <span class="label label-info"><i class="icon-user icon-white"></i><?= $p->name ?></span>
+            <?= player_label($p->name) ?>
             <?php } ?>
             </div>
             

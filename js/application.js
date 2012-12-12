@@ -6,6 +6,8 @@ var covertmission = function() {
             return 'Waiting to start';
         } else if (state == 'starting') {
             return 'Starting game';
+        } else if (state == 'mission-selection') {
+            return 'Waiting for team leader';
         } else {
             return 'Unknown state: '+state;
         }

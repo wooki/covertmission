@@ -6,6 +6,7 @@ class Game {
     var $state = '';
     var $admin_name = '';
     var $players = array();
+    var $current_mission = false;
     
     // work out the correct url for viewing this game
     static function get_url($game) {
@@ -77,6 +78,26 @@ class Game {
         return false;
     }
     
+    // check if all players are in the specified state
+    static function all_players_state($game, $state) {
+        foreach ($game->players as $player) {
+            if ($player->state != $state) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    // get leader
+    static function get_leader($game) {
+        foreach ($game->players as $player) {
+            if ($player->leader == true) {
+                return leader;
+            }
+        }
+        return false;
+    }
+    
     // add a player to the game, returning a random guid for mapping
     // that players requests to this player in the game
     static function add_player($game, $name) {
@@ -96,7 +117,8 @@ class Game {
                 'slug' => $name_slug,
                 'guid' => $guid,
                 'leader' => 'false',
-                'role' => ''
+                'role' => '',
+                'state' => 'starting'
             );
             return $guid;
         }
