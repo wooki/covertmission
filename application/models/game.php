@@ -103,7 +103,12 @@ class Game {
     static function update_player($game, $player) {
         foreach ($game->players as &$p) {
             if ($p->slug == $player->slug) {
-                $p = $player;
+                $p['name'] = $player->name;
+                $p['slug'] = $player->slug;
+                $p['guid'] = $player->guid;
+                $p['leader'] = $player->leader;
+                $p['role'] = $player->role;
+                $p['state'] = $player->state;
             }
         }
     }
