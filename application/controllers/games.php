@@ -34,8 +34,7 @@ class Games extends CI_Controller {
         
         if ($game == false) {
             $this->session->set_flashdata('error', 'Game does not exist');
-            echo "Game not found: ".$slug;
-            //redirect('/', 'location'); 
+            redirect('/', 'location'); 
             return;
         }
         
@@ -113,8 +112,7 @@ class Games extends CI_Controller {
 
         if ($player == false) {
             $this->session->set_flashdata('error', 'You are not a player in that game');
-            echo "No player: ".$guid;
-            //redirect('/', 'location'); 
+            redirect('/', 'location'); 
             return;
         }
         
