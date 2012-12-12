@@ -33,13 +33,15 @@
             <?php } ?>
             <?php } ?>
             
-            <h4>Players in game</h4>
-            
-            <div class="players">
-            <?php foreach ($game->players as $p) { ?>
-            <?= player_label($p->name) ?>
-            <?php } ?>
-            </div>
+            <p>
+                <h4>Players in game</h4>
+                
+                <div class="players">
+                <?php foreach ($game->players as $p) { ?>
+                <?= player_label($p->name) ?>
+                <?php } ?>
+                </div>
+            </p>
             
         </div>
         
