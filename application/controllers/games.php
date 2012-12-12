@@ -69,6 +69,8 @@ echo "DUPE<br />";
             } else {
 echo "INVALID<br />";                
             }
+        } else {
+echo "NO POSTBACK<br />";                
         }
         
         $this->load->library('form_validation');
