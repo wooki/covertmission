@@ -8,6 +8,8 @@
         
     </div>
 
+    <?php if ($message != false) { echo '<div class="row"><div class="span12 game-cmd"><div class="alert alert-error">'.$message.'</div></div></div>'; } ?>
+            
     <div class="row">
     
         <div class="span3 offset2 game-cmd">
