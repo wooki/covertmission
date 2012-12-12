@@ -15,6 +15,8 @@ class Game {
             return '/games/lobby/'.$game->slug; 
         } else if ($game->state == 'starting') {
             return '/games/start/'.$game->slug; 
+        } else if ($game->state == 'mission-selection') {
+            return '/missions/selection/'.$game->slug; 
         } else {
             return false;
         }    
