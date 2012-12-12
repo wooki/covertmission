@@ -9,7 +9,7 @@
         <div class="span4 offset4">
             <?= validation_errors() ?>
             <?php if ($message != false) { echo '<div class="alert alert-error">'.$message.'</div>'; } ?>
-            <?= form_open('games/create') ?>
+            <?= form_open('games/join') ?>
                 <?= form_hidden('postback', '1'); ?>                    
                 <fieldset>
                     <label>Player Name</label>
