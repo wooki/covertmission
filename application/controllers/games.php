@@ -22,7 +22,9 @@ class Games extends CI_Controller {
         
 	}
     
-    public function join($slug) {
+    public function join($slug=false) {
+        
+        if ($slug == false) { show_404('page'); }
         
         $message = false;
         
@@ -91,7 +93,9 @@ class Games extends CI_Controller {
 	}
     
     
-    public function lobby($slug) {
+    public function lobby($slug=false) {
+        
+        if ($slug == false) { show_404('page'); }
         
         // load the game
         $this->load->helper('form');

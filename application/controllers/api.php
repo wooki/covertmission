@@ -2,7 +2,10 @@
 class Api extends CI_Controller {
 
     // returns the state of the specified game
-    public function state($slug) {
+    public function state($slug=false) {
+        
+        if ($slug == false) { show_404('page'); }
+        
         $game = $this->_load_game($slug);
         if ($game != false) {
             
