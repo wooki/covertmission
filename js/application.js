@@ -30,9 +30,10 @@ var covertmission = function() {
                        $('.game_state').html(get_state_description(json_data['return']));                   
                        var player_html = '';
                        $(json_data['players']).each(function(key, item) {
-                           player_html += '<span class="label label-info"><i class="icon-user icon-white"></i>'+item['name']+'</span> ';
+                           player_html += '<span style="display: none;" class="label label-info"><i class="icon-user icon-white"></i>'+item['name']+'</span> ';
                        });
-                       $('.players').html(player_html);                                          
+                       $('.players').html(player_html);
+                       $('.players .span').show();
                    }
                 });
                 
