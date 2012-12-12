@@ -11,7 +11,7 @@ class Game {
     static function get_url($game) {
         if ($game->state == 'joining') {
             return '/games/lobby/'.$game->slug; 
-        if ($game->state == 'starting') {
+        } else if ($game->state == 'starting') {
             return '/games/start/'.$game->slug; 
         } else {
             return false;
