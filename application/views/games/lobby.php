@@ -16,10 +16,10 @@
             an <strong>Imperial Officer</strong> or as a <strong>Rebel Alliance 
             Spy</strong>. Keep your role secret!</p>
             
-            <div class="admin_controls">
             <?php 
-            if ($game->admin_name == $player->name) { 
-                if (count($game->players) >= 5 ) {  ?>
+            if ($game->admin_name == $player->name) { ?>
+            <div class="admin_controls">
+            <?php if (count($game->players) >= 5 ) {  ?>
             
             <?= form_open('games/start') ?>
                 <fieldset>
@@ -29,8 +29,9 @@
             
             <?php } else { ?>
             <p>Waiting for five or more players.</p>
-            <?php }
-            } ?>
+            <?php } }
+            </div>
+            <?php } }
             </div>
             
             <h4>Players in game</h4>
