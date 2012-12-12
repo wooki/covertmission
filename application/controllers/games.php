@@ -59,7 +59,11 @@ class Games extends CI_Controller {
             
             // finally update the state, save and display game            
             $game->state = 'starting';
-            Game::save($games_list);
+            if (Game::save($game, $games_list) == false) {
+                $this->session->set_flashdata('error', 'Error saving game');
+                redirect('/', 'location'); 
+                return;
+            }
             
             // load current player
             $guid = $this->session->userdata('player_id');
