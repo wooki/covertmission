@@ -43,7 +43,7 @@ var covertmission = function() {
                 
                 $('.game_state')
                 
-            }, 3000);
+            }, 5000);
         }
         
     });

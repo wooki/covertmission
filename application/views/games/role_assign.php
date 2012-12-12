@@ -21,7 +21,7 @@
             
             <p>Note that five rejected teams in a row will automatically lead to a win to the Rebel Spies.</p>
             
-            <?= form_open('mission/selection/'<?= $game->slug ?>) ?>
+            <?= form_open('mission/selection/'.$game->slug) ?>
                 <fieldset>
                     <button type="submit" class="btn btn-primary btn-large">Start Mission Selection</button>
                 </fieldset>
