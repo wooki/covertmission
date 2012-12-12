@@ -99,6 +99,15 @@ class Game {
         return false;
     }
     
+    // update an existing player with new data
+    static function update_player($game, $player) {
+        foreach ($game->players as &$p) {
+            if ($p->slug == $player->slug) {
+                $p = $player;
+            }
+        }
+    }
+    
     // add a player to the game, returning a random guid for mapping
     // that players requests to this player in the game
     static function add_player($game, $name) {
