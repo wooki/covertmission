@@ -108,9 +108,8 @@ class Games extends CI_Controller {
         
         // get the player
         $guid = $this->session->userdata('player_id');
-echo "guid: ".$guid;        
         $player = Game::get_player($game, $guid);
-echo "player: ".print_r($player, true);        
+
         if ($player == false) {
             $this->session->set_flashdata('error', 'You are not a player in that game');
             echo "No player: ".$guid;
