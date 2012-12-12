@@ -15,7 +15,7 @@ $(document).ready(function() {
                    $('.game_state').html('Error: '+textStatus);
                },
                success: function(data, textStatus, xhr) {
-                   var json_data = json_decode($data);
+                   var json_data = JSON.parse($data);
                    $('.game_state').html(json_data['return']);                   
                }
             });
