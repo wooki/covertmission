@@ -30,7 +30,7 @@ var covertmission = function() {
                        var json_data = JSON.parse(data);
                        $('.game_state').html(get_state_description(json_data['return']));                   
                        var player_html = '';
-                       json_data['players'].each(function(key, item) {
+                       $(json_data['players']).each(function(key, item) {
                            player_html += '<span class="label label-info"><i class="icon-user icon-white"></i>'+item['name']+'</span>';
                        });
                        $('.players').html(player_html);                                          
