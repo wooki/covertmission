@@ -17,7 +17,7 @@
             <?= form_open('missions/selection/'.$game->slug, array('class' => 'set-team')) ?>
                 <?= form_hidden('team', ''); ?>
                     
-                <p>Discuss and select your team of <span class="label label-info"><?= $team_size ?></span></p>
+                <p>Discuss and select your team of <span class="label label-info" data-team-size="<?= $team_size ?>"><?= $team_size ?></span></p>
                 
                 <?php foreach ($game->players as $p) { ?>
                 <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button"><i class="icon-user"></i> <?= $p->name ?></button>
