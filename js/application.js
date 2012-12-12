@@ -51,8 +51,10 @@ var covertmission = function() {
                            window.location.reload();
                        } else {
                            // if the url is different from current then redirect
-                           if (window.location.pathname != json_data['url']) {
-                               window.location = json_data['url'];
+                           if (json_data['url'] != '') {
+                               if (window.location.pathname != json_data['url']) {
+                                   window.location = json_data['url'];
+                               }
                            }
                        }
                    }

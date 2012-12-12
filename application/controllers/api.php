@@ -20,6 +20,13 @@ class Api extends CI_Controller {
             if ($game_url == false) {
                 $game_url = '';
             }
+            
+            // special case to ensure players have to manually move past
+            // the role assignment page
+            if ($game->state == "starting") {
+                $game_url = '';
+            }
+            
             echo json_encode(array(
                                 'return' => $game->state,
                                 'url' => $game_url,
