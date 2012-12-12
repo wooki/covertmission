@@ -13,7 +13,7 @@
             
             <p>The admin can start the game as soon as there are five or more 
             players.  Each player will then be given a secret role - either
-            an <?= player_role('Imperial Officer') ?> or as a <?= player_role('Rebel Alliance Spy') ?>. Keep your role secret!</p>
+            an <?= player_role('Imperial Officer') ?> or as a <?= player_role('Rebel Spy') ?>. Keep your role secret!</p>
             
             <?php 
             if ($game->admin_name == $player->name) { ?>
