@@ -11,7 +11,7 @@
             
             <p data-game-state="joining" class="alert alert-info game_state">Starting game</p>
             
-            <p>You are playing as a<?php if ($player->role == "Imperial Officer") { echo 'n';  } ?> <strong><?= $player->role ?></strong>. You
+            <p>You are playing as a<?php if ($player->role == "Imperial Officer") { echo 'n';  } ?> <strong><?= player_role($player->role) ?></strong>. You
             must complete 3 our of the 5 missions that you will be set to win the game.</p>
             
             <p>A team leader will be assigned for each mission and they then select the operatives to take part in the mission. Not every player
