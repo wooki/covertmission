@@ -102,8 +102,7 @@ class Games extends CI_Controller {
         
         if ($game == false) {
             $this->session->set_flashdata('error', 'Lobby does not exist');
-            echo "Game not found: ".$slug;
-            //redirect('/', 'location'); 
+            redirect('/', 'location'); 
             return;
         }
         
