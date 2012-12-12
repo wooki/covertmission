@@ -59,11 +59,13 @@ class Games extends CI_Controller {
             if ($this->form_validation->run() == true) {
 
                 // add player and jump into game
-                if (Game::add_player($game, $player_name) == true) {
+echo "Game: ".print_r($game, true)."<br />";                
+                $guid = Game::add_player($game, $player_name);
+                        
+                if ($guid != false) {
+                    $this->session->set_userdata('player_id', $guid);                
                     if (Game::save($game, $games_list) == true) {
                         $message = "saved";
-                        $guid = Game::add_player($game, $player_name);
-                        $this->session->set_userdata('player_id', $guid);
                         
                         //$this->_redirect_existing_player($game);
                         //return;                
