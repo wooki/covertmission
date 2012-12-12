@@ -24,3 +24,9 @@ body {
 form {
     padding: 0 15px 0 15px;
 }
+
+p {
+    margin-left: 1em;
+    margin-right: 1em;
+    color: #000;
+}
