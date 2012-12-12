@@ -136,7 +136,7 @@ echo $player->state;
                 'guid' => $guid,
                 'leader' => 'false',
                 'role' => '',
-                'state' => 'starting'
+                'state' => 'joining'
             );
             return $guid;
         }

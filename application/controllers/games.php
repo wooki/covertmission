@@ -76,6 +76,9 @@ class Games extends CI_Controller {
                 return;
             }
             
+            $player->state = 'starting';      
+            Game::update_player($game, $player);
+            
             // set view data
             $this->view_data = array(
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
@@ -99,6 +102,9 @@ class Games extends CI_Controller {
                 redirect('/', 'location'); 
                 return;
             }
+            
+            $player->state = 'starting';      
+            Game::update_player($game, $player);
             
             // set view data
             $this->view_data = array(
