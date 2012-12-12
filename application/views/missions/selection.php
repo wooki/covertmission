@@ -23,7 +23,7 @@
                 <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button"><i class="icon-user"></i> <?= $p->name ?></button>
                 <?php } ?>
                 
-                <p>&nbsp;</p>
+                <p class="validation-message">&nbsp;</p>
                 
                 <button type="submit" class="btn btn-primary btn-large">Set Team</button>
 

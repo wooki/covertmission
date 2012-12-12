@@ -33,7 +33,7 @@ var covertmission = function() {
             var selected_count = $('button[data-toggle].active').length;
             if (selected_count != $('[data-team-size]').attr('data-team-size')) {
                 event.preventDefault();
-                alert("Please select the correct number of players for your team");
+                $('.validation-message').addClass('alert alert-error').html("Please select the correct number of players for your team");
             }
         });
         
