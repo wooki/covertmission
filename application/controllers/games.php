@@ -95,6 +95,7 @@ class Games extends CI_Controller {
     public function lobby($slug) {
         
         // load the game
+        $this->load->helper('form');
         $this->load->model(array('game_list', 'game'));
         $games_list = new Game_List();
         $games_list->load();
