@@ -21,7 +21,7 @@
             <div class="admin_controls">
             <?php if (count($game->players) >= 5 ) {  ?>
             
-            <?= form_open('games/start') ?>
+            <?= form_open('games/start/'<?= $game->slug ?>) ?>
                 <fieldset>
                     <button type="submit" class="btn btn-primary btn-large">Start</button>
                 </fieldset>
