@@ -7,6 +7,15 @@ class Game {
     var $admin_name = '';
     var $players = array();
     
+    // work out the correct url for viewing this game
+    static function get_url($game) {
+        if ($game->state == 'joining') {
+            return '/games/lobby/'.$game->slug; 
+        } else {
+            return false;
+        }    
+    }
+    
     // load from disc, from json file
     static function load($slug, $game_list) {
         return $game_list->get_game($slug);        

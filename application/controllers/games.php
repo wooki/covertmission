@@ -189,10 +189,11 @@ class Games extends CI_Controller {
     }
     
     public function _redirect_existing_player($game) {
-        if ($game->state == 'joining') {
-            redirect('/games/lobby/'.$game->slug, 'location'); 
+        $url = Game::get_url($game);
+        if ($url != false) {
+            redirect($url, 'location'); 
         } else {
-            $this->session->set_flashdata('error', 'Cannot rejoin - unknown state: '.$game->state);
+            $this->session->set_flashdata('error', 'Game is in unkown state: '.$game->state);
             redirect('/', 'location'); 
         }
     }
