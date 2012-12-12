@@ -31,7 +31,7 @@ var covertmission = function() {
         // and keeps the hidden field updated
         $('form.set-team').submit(function(event) {
             var selected_count = $('button[data-toggle].active').length;
-            if (selected_count != $('button[data-toggle].active').attr('data-team-size')) {
+            if (selected_count != $('[data-team-size]').attr('data-team-size')) {
                 event.preventDefault();
                 alert("Please select the correct number of players for your team");
             }
