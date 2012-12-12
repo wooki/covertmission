@@ -35,7 +35,8 @@ class Missions extends CI_Controller {
             return;
         } else {
             // update players state to acknowledge they are on this page
-            $player->state = 'mission-selection';            
+            $player->state = 'mission-selection';      
+            Game::update_player($game, $player);
         }
         
         // when the first person hits this page set the mission index
