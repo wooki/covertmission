@@ -7,9 +7,9 @@
         </div>
         
     </div>
-
-    <?php if ($error != false) { echo '<div class="row"><div class="span12 game-cmd"><div class="alert alert-error">'.$error.'</div></div></div>'; } ?>
-            
+    
+    <?php if ($error != false) { echo '<div class="row"><div class="span4 offset4 game-cmd"><div class="alert alert-error">'.$error.'</div></div></div>'; } ?>
+    
     <div class="row">
     
         <div class="span3 offset2 game-cmd">
