@@ -101,17 +101,14 @@ class Game {
     
     // update an existing player with new data
     static function update_player($game, $player) {
-echo $player->slug;                
         foreach ($game->players as &$p) {
-echo $p->slug;                
             if ($p->slug == $player->slug) {
-                $p['name'] = $player->name;
-                $p['slug'] = $player->slug;
-                $p['guid'] = $player->guid;
-                $p['leader'] = $player->leader;
-                $p['role'] = $player->role;
-                $p['state'] = $player->state;
-echo $player->state;                
+                $p->name = $player->name;
+                $p->slug = $player->slug;
+                $p->guid = $player->guid;
+                $p->leader = $player->leader;
+                $p->role = $player->role;
+                $p->state = $player->state;
             }
         }
     }
