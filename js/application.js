@@ -15,7 +15,15 @@ var covertmission = function() {
     $(document).ready(function() {
         
         // set the background depending on player role        
-        $.backstretch("/img/rebels-bg.jpg");
+        if ($('.player').length) {
+            if ($('.player').attr('data-role') == "Imperial Officer") {
+                $.backstretch("/img/imperial-bg.jpg");
+            } else {
+                $.backstretch("/img/rebels-bg.jpg");
+            }            
+        } else {
+            $.backstretch("/img/bg.jpg");
+        }
         
         // lobby - refresh status every n seconds and update players
         if ($('.game_state').length) {
