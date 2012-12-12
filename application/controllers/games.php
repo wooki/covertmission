@@ -22,6 +22,80 @@ class Games extends CI_Controller {
         
 	}
     
+    public function start($slug=false) {
+        
+        if ($slug == false) { show_404('page'); }
+        
+        // load the game
+        $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
+        $game = Game::load($slug, $games_list);
+        
+        if ($game == false) {
+            $this->session->set_flashdata('error', 'Game does not exist');
+            redirect('/', 'location'); 
+            return;
+        }
+        
+        if ($game->state == 'joining') {
+            // first player sets up the data
+            
+            // default to imperial
+            foreach ($game->players as &$player) {
+                $player->role = "Imperial Officer";
+            }
+            
+            // assign spies
+            $spy_count = Game::how_many_spies($game);
+            $spy_keys = array_rand($game->players, $spy_count);
+            foreach ($spy_keys as $spy_key) {
+                $game->players[$spy_key]->role = "Rebel Spy";
+            }
+            
+            // assign a random leader
+            $leader_key = array_rand($game->players, 1);
+            $game->players[$leader_key]->leader = true;
+            
+            // finally update the state, save and display game            
+            $game->state = 'starting';
+            Game::save($games_list);
+            
+            // load current player
+            $guid = $this->session->userdata('player_id');
+            $player = Game::get_player($game, $guid);
+    
+            if ($player == false) {
+                $this->session->set_flashdata('error', 'You are not a player in that game');
+                redirect('/', 'location'); 
+                return;
+            }
+            
+            // set view data
+            $this->view_data = array(
+                'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
+                'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+                'game' => $game,
+                'player' => $player
+            );
+            
+            $this->load->view('shared/_header.php', $this->view_data);
+            $this->load->view('games/role_assign', $this->view_data);
+            $this->load->view('shared/_footer.php', $this->view_data);
+            
+        } else if ($game->state == 'starting') {
+            
+            
+        } else {
+            $this->session->set_flashdata('error', 'Game has already started, cannot start it');
+            redirect('/', 'location'); 
+            return;
+        }
+        
+        
+    }
+    
+    // join game and redirect to lobby
     public function join($slug=false) {
         
         if ($slug == false) { show_404('page'); }
@@ -36,6 +110,12 @@ class Games extends CI_Controller {
         
         if ($game == false) {
             $this->session->set_flashdata('error', 'Game does not exist');
+            redirect('/', 'location'); 
+            return;
+        }
+        
+        if ($game->state != 'joining') {
+            $this->session->set_flashdata('error', 'Game has already started, cannot join');
             redirect('/', 'location'); 
             return;
         }

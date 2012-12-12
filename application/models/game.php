@@ -16,6 +16,35 @@ class Game {
         }    
     }
     
+    // work out how many spies there should be
+    static function how_many_spies($game) {
+        return round(count($game->players) * 0.33);
+    }
+    
+    // work out how many agents there should be
+    static function how_many_agents($game, $mission_index) {
+        $agents = array(
+            array(2, 2, 2, 3, 3, 3),
+            array(3, 3, 3, 4, 4, 4),
+            array(2, 4, 3, 4, 4, 4),
+            array(3, 3, 4, 5, 5, 5),
+            array(3, 4, 4, 5, 5, 5)
+        );
+        return $agents[$mission_index][count($game->players)];
+    }
+    
+    // work out how many fail cards are required
+    static function how_many_fails($game, $mission_index) {
+        $agents = array(
+            array(1, 1, 1, 1, 1, 1),
+            array(1, 1, 1, 1, 1, 1),
+            array(1, 1, 1, 1, 1, 1),
+            array(1, 1, 2, 2, 2, 2),
+            array(1, 1, 1, 1, 1, 1)            
+        );
+        return $agents[$mission_index][count($game->players)];
+    }
+    
     // load from disc, from json file
     static function load($slug, $game_list) {
         return $game_list->get_game($slug);        
@@ -64,6 +93,7 @@ class Game {
                 'name' => $name,
                 'slug' => $name_slug,
                 'guid' => $guid,
+                'leader' => 'false',
                 'role' => ''
             );
             return $guid;
