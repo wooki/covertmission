@@ -49,7 +49,7 @@ class Games extends CI_Controller {
         }
 
         $player_name = '';
-        if ($this->input->post('postback') === true) {
+        if ($this->input->post('postback') === '1') {
             
             $player_name = $this->input->post('player_name');
 echo "name: ".$player_name."<br />";                
