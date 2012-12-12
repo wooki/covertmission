@@ -12,9 +12,6 @@ var covertmission = function() {
     // do things at startup
     $(document).ready(function() {
         
-        // bootstrap alert dismiss
-        $(".alert").alert();
-        
         // set the background depending on player role        
         $.backstretch("/img/rebels-bg.jpg");
         
