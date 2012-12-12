@@ -1,8 +1,6 @@
 <?php
 class Game {
     
-    static var 
-    
     var $slug = '';
     var $name = '';
     var $state = '';
