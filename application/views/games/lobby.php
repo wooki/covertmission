@@ -13,8 +13,7 @@
             
             <p>The admin can start the game as soon as there are five or more 
             players.  Each player will then be given a secret role - either
-            an <strong>Imperial Officer</strong> or as a <strong>Rebel Alliance 
-            Spy</strong>. Keep your role secret!</p>
+            an <?= player_role('Imperial Officer') ?> or as a <?= player_role('Rebel Alliance Spy') ?>. Keep your role secret!</p>
             
             <?php 
             if ($game->admin_name == $player->name) { ?>
@@ -33,15 +32,15 @@
             <?php } ?>
             <?php } ?>
             
-            <p>
-                <h4>Players in game</h4>
-                
-                <div class="players">
-                <?php foreach ($game->players as $p) { ?>
-                <?= player_label($p->name) ?>
-                <?php } ?>
-                </div>
-            </p>
+            <div class="padding">
+            <h4>Players in game</h4>
+            
+            <div class="players">
+            <?php foreach ($game->players as $p) { ?>
+            <?= player_label($p->name) ?>
+            <?php } ?>
+            </div>
+            </div>
             
         </div>
         

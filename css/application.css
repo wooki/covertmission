@@ -31,3 +31,7 @@ p {
     font-size: 1.2em;
     color: #000;
 }
+.padding {
+    padding-left: 1em;
+    padding-right: 1em;
+}
