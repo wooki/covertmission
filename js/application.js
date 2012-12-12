@@ -35,7 +35,7 @@ var covertmission = function() {
                        $('.players').html(player_html);
                        
                        // if we are admin and have enough players refresh lobby page
-                       if ($('.admin_controls').length && $(json_data['players']).length >= 5) {
+                       if ($('.admin_controls_waiting').length && $(json_data['players']).length >= 5) {
                            window.location.reload();
                        }
                    }
