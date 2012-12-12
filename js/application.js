@@ -12,10 +12,10 @@ $(document).ready(function() {
             $.ajax({
                url: '/api/state/test',
                error: function(xhr, textStatus, error) {
-                   $('.game_state').update('Error: '+textStatus);
+                   $('.game_state').html('Error: '+textStatus);
                },
                success: function(data, textStatus, xhr) {
-                   $('.game_state').update('Success: '+textStatus+' : '+data);                   
+                   $('.game_state').html('Success: '+textStatus+' : '+data);                   
                }
             });
             
