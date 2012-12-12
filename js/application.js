@@ -4,6 +4,8 @@ var covertmission = function() {
     function get_state_description(state) {
         if (state == 'joining') {
             return 'Waiting to start';
+        } else if (state == 'starting') {
+            return 'Starting game';
         } else {
             return 'Unknown state: '+state;
         }
@@ -16,7 +18,7 @@ var covertmission = function() {
         $.backstretch("/img/rebels-bg.jpg");
         
         // lobby - refresh status every n seconds and update players
-        if ($('.lobby').length) {
+        if ($('.game_state').length) {
             // <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
             setInterval(function() {
                 
