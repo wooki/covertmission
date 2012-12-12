@@ -18,7 +18,7 @@
                 <fieldset>
                     <div class="btn-group" data-toggle="buttons-checkbox">
                         <?php foreach ($game->players as $p) { ?>
-                        <button type="button" class="btn"><i class="icon-user"></i><?= $p->name ?></button>
+                        <button type="button" class="btn  btn-large"><i class="icon-user"></i><?= $p->name ?></button>
                         <?php } ?>
                     </div>
                 
