@@ -49,7 +49,8 @@ class Games extends CI_Controller {
         }
 
         $this->load->library('form_validation');
-
+        $this->form_validation->set_error_delimiters('<div class="alert alert-error">', '</div>');
+       
         $player_name = '';
         if ($this->input->post('postback') === '1') {
 
