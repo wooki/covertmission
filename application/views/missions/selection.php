@@ -16,14 +16,19 @@
             <?php if ($player->leader === true) { ?>            
             <?= form_open('missions/selection/'.$game->slug) ?>
                 <fieldset>
+                    
                     <p>Discuss and select your team:</p>
-                    <div class="btn-group" data-toggle="buttons-checkbox">
+                    
+                    <div class="padding">
+                    
                         <?php foreach ($game->players as $p) { ?>
-                        <button type="button" class="btn  btn-large"><i class="icon-user"></i><?= $p->name ?></button>
+                        <button type="button" class="btn btn-large" data-toggle="button"><i class="icon-user"></i> <?= $p->name ?></button>
                         <?php } ?>
+                        
+                        <p>&nbsp;</p>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">Set Team</button>
                     </div>
-                    <p>&nbsp;</p>
-                    <button type="submit" class="btn btn-primary btn-large">Set Team</button>
                 </fieldset>
             </form>            
             <?php }  ?>
