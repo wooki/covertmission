@@ -12,8 +12,10 @@ var covertmission = function() {
     // do things at startup
     $(document).ready(function() {
         
-        // set the background depending on player role
+        // bootstrap alert dismiss
+        $(".alert").alert();
         
+        // set the background depending on player role        
         $.backstretch("/img/rebels-bg.jpg");
         
         // lobby - refresh status every n seconds and update players
@@ -31,7 +33,7 @@ var covertmission = function() {
                        $('.game_state').html(get_state_description(json_data['return']));                   
                        var player_html = '';
                        $(json_data['players']).each(function(key, item) {
-                           player_html += '<span class="label label-info"><i class="icon-user icon-white"></i>'+item['name']+'</span>';
+                           player_html += '<span class="label label-info"><i class="icon-user icon-white"></i>'+item['name']+'</span> ';
                        });
                        $('.players').html(player_html);                                          
                    }
