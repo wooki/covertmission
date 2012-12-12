@@ -12,7 +12,8 @@
             <p class="alert alert-info game_state">Waiting for team leader</p>
             
             <p>Mission leader is: <?= player_label($leader->name) ?></p>
-            
+            <p><?= print_r($player, true) ?></p>
+            <p><?= print_r($leader, true) ?></p>
             <?php if ($player->leader == true) { ?>            
             <?= form_open('missions/selection/'.$game->slug) ?>
                 <fieldset>
