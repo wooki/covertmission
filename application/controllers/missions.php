@@ -57,7 +57,8 @@ class Missions extends CI_Controller {
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'game' => $game,
             'player' => $player,
-            'leader' => Game::get_leader($game)
+            'leader' => Game::get_leader($game),
+            'team_size' => Game::how_many_agents($game, $game->current_mission)
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
