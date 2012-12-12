@@ -21,7 +21,7 @@
                         <button type="button" class="btn  btn-large"><i class="icon-user"></i><?= $p->name ?></button>
                         <?php } ?>
                     </div>
-                
+                    <p>&nbsp;</p>
                     <button type="submit" class="btn btn-primary btn-large">Set Team</button>
                 </fieldset>
             </form>            
