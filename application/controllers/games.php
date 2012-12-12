@@ -24,6 +24,8 @@ class Games extends CI_Controller {
     
     public function join($slug) {
         
+        $message = false;
+        
         // load the game
         $this->load->model(array('game_list', 'game'));
         $games_list = new Game_List();
@@ -60,7 +62,7 @@ class Games extends CI_Controller {
                     $this->_redirect_existing_player($game);
                     return;                
                 } else {
-                    echo "DUPLICATE PLAYER NAME";
+                    $message = "DUPLICATE PLAYER NAME";
                 }
             }
         }
@@ -71,7 +73,8 @@ class Games extends CI_Controller {
             'title' => 'Join '.$game->name.' - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'game' => $game,
-            'player_name' => $player_name
+            'player_name' => $player_name,
+            'message' => $message
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
