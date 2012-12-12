@@ -50,7 +50,9 @@ class Games extends CI_Controller {
 
         $player_name = '';
         if ($this->input->post('postback') === '1') {
-            
+
+            $this->load->library('form_validation');
+        
             $player_name = $this->input->post('player_name');
 echo "name: ".$player_name."<br />";                
             $this->form_validation->set_rules('player_name', 'Player Name', 'required');            
@@ -72,8 +74,6 @@ echo "INVALID<br />";
         } else {
 echo "NO POSTBACK<br />";                
         }
-        
-        $this->load->library('form_validation');
         
         $this->view_data = array(
             'title' => 'Join '.$game->name.' - Covert Mission - Group game with a star wars theme',
