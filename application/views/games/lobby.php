@@ -29,8 +29,8 @@
             
             <?php } else { ?>
             <p>Waiting for five or more players.</p>
-            <?php } }  ?>
             </div>
+            <?php } ?>
             <?php } ?>
             </div>
             
