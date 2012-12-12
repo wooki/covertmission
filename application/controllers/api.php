@@ -9,13 +9,21 @@ class Api extends CI_Controller {
         $game = $this->_load_game($slug);
         if ($game != false) {
             
+            $players = array();
+            foreach ($game->players as $player) {
+                $players[] = array('name' => $player->name,
+                                   'slug' => $player->slug
+                                   );
+            }
+            
             $game_url = Game::get_url($game);
             if ($game_url == false) {
                 $game_url = 'jquery ';
             }
             echo json_encode(array(
                                 'return' => $game->state,
-                                'url' => $game_url
+                                'url' => $game_url,
+                                'players' => $players
                             ));
         }
     }

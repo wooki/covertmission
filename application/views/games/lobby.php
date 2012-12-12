@@ -1,4 +1,4 @@
-<div class="container page">
+<div class="container page lobby">
 
     <div class="row">
     
@@ -9,7 +9,7 @@
         
         <div class="span4 offset4">
             
-            <p class="alert alert-info game_state">Waiting to start</p>
+            <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
             
             <p>The admin can start the game as soon as there are five or more 
             players.  Each player will then be given a secret role - either
@@ -33,9 +33,11 @@
             
             <h4>Players in game</h4>
             
+            <div class="players">
             <?php foreach ($game->players as $p) { ?>
             <span class="label label-info"><i class="icon-user icon-white"></i><?= $p->name ?></span>
             <?php } ?>
+            </div>
             
         </div>
         
