@@ -62,6 +62,8 @@ class Games extends CI_Controller {
                 if (Game::add_player($game, $player_name) == true) {
                     if (Game::save($game, $games_list) == true) {
                         $message = "saved";
+                        $guid = Game::add_player($game, $game->admin_name);
+                        $this->session->set_userdata('player_id', $guid);
                         //$this->_redirect_existing_player($game);
                         //return;                
                     } else {
