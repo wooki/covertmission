@@ -17,6 +17,8 @@ class Game {
             return '/games/start/'.$game->slug; 
         } else if ($game->state == 'mission-selection') {
             return '/missions/selection/'.$game->slug; 
+        } else if ($game->state == 'mission-approve') {
+            return '/missions/approve/'.$game->slug; 
         } else {
             return false;
         }    

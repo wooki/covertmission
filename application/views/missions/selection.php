@@ -14,13 +14,13 @@
             <p>Mission leader is: <?= player_label($leader->name) ?></p>
             
             <?php if ($player->leader === true) { ?>            
-            <?= form_open('missions/selection/'.$game->slug, array('class' => 'set-team')) ?>
+            <?= form_open('missions/approve/'.$game->slug, array('class' => 'set-team')) ?>
                 <?= form_hidden('team', ''); ?>
                     
                 <p>Discuss and select your team of <span class="label label-info" data-team-size="<?= $team_size ?>"><?= $team_size ?></span></p>
                 
                 <?php foreach ($game->players as $p) { ?>
-                <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button"><i class="icon-user"></i> <?= $p->name ?></button>
+                <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button" data-player-slug="<?= $p->slug ?>"><i class="icon-user"></i> <?= $p->name ?></button>
                 <?php } ?>
                 
                 <p class="validation-message">&nbsp;</p>

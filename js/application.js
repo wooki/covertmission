@@ -8,6 +8,8 @@ var covertmission = function() {
             return 'Starting game';
         } else if (state == 'mission-selection') {
             return 'Waiting for team leader';
+        } else if (state == 'mission-approve') {
+            return 'Waiting for player votes';
         } else {
             return 'Unknown state: '+state;
         }
@@ -34,6 +36,12 @@ var covertmission = function() {
             if (selected_count != $('[data-team-size]').attr('data-team-size')) {
                 event.preventDefault();
                 $('.validation-message').addClass('alert alert-error').html("Please select the correct number of players for your team");
+            } else {
+                var $team_data = []
+                $('button[data-toggle].active').each (key, item) {
+                    $team_data.push(item.attr('data-player-slug'));
+                }
+                $('input[name=team]').val($team_data.join('|'));
             }
         });
         
