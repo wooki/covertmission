@@ -40,14 +40,21 @@ class Missions extends CI_Controller {
         if (Game::all_players_state($game, 'mission-selection') == true) {
             $game->state = 'mission-approve';                        
             $team_data = explode("|", $this->input->post('team'));
-        }
         
-        // assemble the team
-        $team = array();
-        foreach($game->players as $p) {
-            if (in_array($p->slug, $team_data)) {
-                $team[] = $p;
+            // assemble the team
+            $team = array();
+            foreach($game->players as $p) {
+                if (in_array($p->slug, $team_data)) {
+                    $team[] = $p;
+                }
             }
+            
+            // save to game
+            Game::set_team($game, $team);
+            
+        } else {
+            // get the team from the game
+            $team = Game::get_team($game);
         }
         
         // update players state to acknowledge they are on this page

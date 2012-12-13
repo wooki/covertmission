@@ -93,6 +93,31 @@ class Game {
         return true;
     }
     
+    // set current team
+    static function set_team($game, $team) {
+        foreach ($team as $p) {
+            foreach ($game->players as &$player) {
+                if ($player->slug === $p->slug) {
+                    $player->team = true;
+                } else {
+                    $player->team = false;
+                }
+            }
+        }
+        return false;
+    }
+    
+    // get team
+    static function get_team($game) {
+        $team = array();
+        foreach ($game->players as $player) {
+            if ($player->team === true) {
+                $team[] = $player;                
+            }
+        }
+        return $team;
+    }
+    
     // get leader
     static function get_leader($game) {
         foreach ($game->players as $player) {
