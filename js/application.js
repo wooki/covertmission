@@ -40,7 +40,7 @@ var covertmission = function() {
                 event.preventDefault();
                 var $team_data = []
                 $('button[data-toggle].active').each(function(key, item) {
-                    $team_data.push(item.attr('data-player-slug'));
+                    $team_data.push($(item).attr('data-player-slug'));
                 });
                 $('input[name=team]').val($team_data.join('|'));
             }
