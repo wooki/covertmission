@@ -29,6 +29,19 @@ var covertmission = function() {
             $.backstretch("/img/bg.jpg");
         }
         
+        // vote requires one of approve/reject button 
+        $('form.vote').submit(function(event) {
+            var selected_count = $('.btn-group button.active').length;
+            if (selected_count != 1) {
+                event.preventDefault();
+                $('.validation-message').addClass('alert alert-error').html("Please select either Accept or Reject");
+            } else {
+                $('.btn-group button.active').each(function(key, item) {
+                    $('input[name=vote]').val($(item).text());
+                });                
+            }
+        });
+        
         // set team - require team leader to set correct number of players
         // and keeps the hidden field updated
         $('form.set-team').submit(function(event) {
@@ -37,7 +50,7 @@ var covertmission = function() {
                 event.preventDefault();
                 $('.validation-message').addClass('alert alert-error').html("Please select the correct number of players for your team");
             } else {
-                var $team_data = []
+                var $team_data = [];
                 $('button[data-toggle].active').each(function(key, item) {
                     $team_data.push($(item).attr('data-player-slug'));
                 });

@@ -18,8 +18,10 @@
                 <?= player_label($p->name) ?>
             <?php } ?>
             
+            <? if ($player->vote == '') { ?>
             <?= form_open('missions/vote/'.$game->slug, array('class' => 'vote')) ?>
-                    
+                <?= form_hidden('vote', ''); ?>
+                  
                 <p>Vote to approve or reject the leaders team</p>
                 
                 <div class="btn-group" data-toggle="buttons-radio">
@@ -32,7 +34,9 @@
                 <button type="submit" class="btn btn-primary btn-large">Vote</button>
 
             </form>            
-            
+            <? } else { ?>
+            <p>Voted: <span class="label label-info"><?= $player->vote ?></span></p>
+            <? } ?>
         </div>
         
     </div>

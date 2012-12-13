@@ -95,12 +95,13 @@ class Game {
     
     // set current team
     static function set_team($game, $team) {
+        foreach ($game->players as &$player) {
+            $player->team = false;
+        }
         foreach ($team as $p) {
             foreach ($game->players as &$player) {
                 if ($player->slug === $p->slug) {
                     $player->team = true;
-                } else {
-                    $player->team = false;
                 }
             }
         }
@@ -139,6 +140,7 @@ class Game {
                 $p->role = $player->role;
                 $p->state = $player->state;
                 $p->team = $player->team;
+                $p->vote = $player->vote;
             }
         }
     }
@@ -164,7 +166,8 @@ class Game {
                 'leader' => false,
                 'role' => '',
                 'state' => 'joining',
-                'team' => false
+                'team' => false,
+                'vote' => ''
             );
             return $guid;
         }
