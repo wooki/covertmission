@@ -138,6 +138,7 @@ class Game {
                 $p->leader = $player->leader;
                 $p->role = $player->role;
                 $p->state = $player->state;
+                $p->team = $player->team;
             }
         }
     }
@@ -160,9 +161,10 @@ class Game {
                 'name' => $name,
                 'slug' => $name_slug,
                 'guid' => $guid,
-                'leader' => 'false',
+                'leader' => false,
                 'role' => '',
-                'state' => 'joining'
+                'state' => 'joining',
+                'team' => false
             );
             return $guid;
         }

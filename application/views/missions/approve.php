@@ -32,7 +32,7 @@
                 <button type="submit" class="btn btn-primary btn-large">Vote</button>
 
             </form>            
-            <?php } ?>
+            
         </div>
         
     </div>
