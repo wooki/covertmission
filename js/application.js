@@ -38,9 +38,9 @@ var covertmission = function() {
                 $('.validation-message').addClass('alert alert-error').html("Please select the correct number of players for your team");
             } else {
                 var $team_data = []
-                $('button[data-toggle].active').each (key, item) {
+                $('button[data-toggle].active').each(function(key, item) {
                     $team_data.push(item.attr('data-player-slug'));
-                }
+                });
                 $('input[name=team]').val($team_data.join('|'));
             }
         });
