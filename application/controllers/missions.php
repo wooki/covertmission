@@ -128,7 +128,6 @@ class Missions extends CI_Controller {
     
         // when the first player reaches this point update game status
         // and look for posted player data
-echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";        
         if (Game::all_players_state($game, 'mission-selection') == true) {
             $game->state = 'mission-approve';                        
             $team_data = explode("|", $this->input->post('team'));
