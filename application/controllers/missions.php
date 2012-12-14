@@ -51,7 +51,6 @@ class Missions extends CI_Controller {
            
            // fail 5th - Game Over
            
-           
            // fail - next team leader
            
            // success - go to mission

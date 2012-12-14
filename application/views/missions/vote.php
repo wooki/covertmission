@@ -23,10 +23,11 @@
                   
                 <p>Acknowledge vote result: <span class="label label-info"><?= $vote_result ?></span></p>
                 
-                <p class="validation-message">&nbsp;</p>
-                
+                <?php if ($player->state == "mission-vote") { ?>
                 <button type="submit" class="btn btn-primary btn-large">Acknowledge</button>
-
+                <?php } else { ?>
+                <p>Waiting for other players</p>
+                <?php } ?>
             </form>            
             
         </div>
