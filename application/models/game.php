@@ -84,6 +84,13 @@ class Game {
         return $g;
     }
     
+    // start mission, resets votes but thats it
+    static function start_mission($game) {
+        foreach ($game->players as &$player) {
+            $player->vote = false;
+        }
+    }
+    
     // next mission number, reset votes and new leader
     static function next_team($game) {
         $game->current_team++;
