@@ -169,7 +169,9 @@ echo "<p style=\"background: #fff;\">".Game::check_vote($game)."</p>";
         }
 
         // finally save the game
-        Game::save($game, $games_list);
+        if (Game::save($game, $games_list) == false) {
+echo "<p style=\"background: #ffc;\">SAVE FAILED</p>";     
+        };
         
         // set view data
         $this->view_data = array(
