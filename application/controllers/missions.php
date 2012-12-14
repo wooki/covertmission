@@ -36,6 +36,7 @@ class Missions extends CI_Controller {
     
         // first time player hits page set state, if they are posting back then update
         $postback = $this->input->post('postback');
+echo "<p>".print_r($postback, true)."</p>";        
         if ($postback == '1') {            
             $player->state = 'mission-vote-acknowledge';  
         } else {
@@ -45,7 +46,7 @@ class Missions extends CI_Controller {
         
         // check success/fail
         $vote_result = Game::check_vote($game);
-        
+echo "<p>".print_r($vote_result, true)."</p>";        
         // when all players have acknowledged we redirect top relevant step
 echo "<p>".print_r($game->players, true)."</p>";        
         if (Game::all_players_state($game, 'mission-vote-acknowledge') == true) {
