@@ -111,7 +111,8 @@ class Games extends CI_Controller {
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
                 'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
                 'game' => $game,
-                'player' => $player
+                'player' => $player,
+                'spies' => Game::get_spies($game)
             );
             
             $this->load->view('shared/_header.php', $this->view_data);

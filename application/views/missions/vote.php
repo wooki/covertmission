@@ -23,6 +23,12 @@
                   
                 <p>Acknowledge vote result: <span class="label label-info"><?= $vote_result ?></span></p>
                 
+                <p>The following players voted against the team selection:</p>
+                <?php foreach ($player as $p) { ?>
+                    <?php if ($p->vote == "Reject") { ?><?= player_label($p->name) ?>
+                    <?php } ?>
+                <?php } ?>
+                
                 <?php if ($player->state == "mission-vote") { ?>
                 <button type="submit" class="btn btn-primary btn-large">Acknowledge</button>
                 <?php } else { ?>

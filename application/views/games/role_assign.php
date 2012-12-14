@@ -12,7 +12,17 @@
             <p data-game-state="starting" class="alert alert-info game_state">Starting game</p>
             
             <p>You are playing as a<?php if ($player->role == "Imperial Officer") { echo 'n';  } ?>
-            <strong><?= player_role($player->role) ?></strong>. You
+            <strong><?= player_role($player->role) ?></strong></p>
+            
+            <?php if ($player->role == "Rebel Spy") { ?>
+                <p>Other Rebel Spies: <?php foreach ($spies as $spy) { ?>
+                <?php if ($spy->slug != $player->slug) { echo $spy->name; } ?>
+                <?php } ?></p>                
+            <?php } else { ?>
+                <p>Note: Rebel Spies will know who each other are!</p>
+            <?php } ?>
+            
+            <p>You
             must complete 3 our of the 5 missions that you will be set to win the game.</p>
             
             <p>A team leader will be assigned for each mission and they then select the operatives to 

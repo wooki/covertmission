@@ -178,6 +178,17 @@ class Game {
         return $team;
     }
     
+    // get spies
+    static function get_spies($game) {
+        $spies = array();
+        foreach ($game->players as $player) {
+            if ($player->role === "Rebel Spy") {
+                $spies[] = $player;                
+            }
+        }
+        return $spies;
+    }
+    
     // get leader
     static function get_leader($game) {
         foreach ($game->players as $player) {
