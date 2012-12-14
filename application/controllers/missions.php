@@ -1,6 +1,64 @@
 <?php
 class Missions extends CI_Controller {
     
+    // display mission result and unless one team has won
+    // link back to next team assign page
+    public function result($slug=false) {
+        
+        if ($slug == false) { show_404('page'); }
+        
+        // load the game
+        $this->load->helper('form');
+        $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
+        $game = Game::load($slug, $games_list);
+        
+        if ($game == false) {
+            $this->session->set_flashdata('error', 'Game does not exist');
+            redirect('/', 'location'); 
+            return;
+        } else if ($game->state != 'mission-result') {
+            $this->session->set_flashdata('error', 'Game state has moved');
+            redirect(Game::get_url($game), 'location'); 
+            return;
+        }
+        
+        // load current player
+        $guid = $this->session->userdata('player_id');
+        $player = Game::get_player($game, $guid);
+
+        if ($player == false) {
+            $this->session->set_flashdata('error', 'You are not a player in that game');
+            redirect('/', 'location'); 
+            return;
+        }
+    
+        // when players initially arrive update their state, depending if they
+        // are onthe mission or not
+        $player->state = 'mission-result';  
+        
+        Game::update_player($game, $player);    
+        
+        // finally save the game
+        Game::save($game, $games_list);
+        
+        // set view data
+        $this->view_data = array(
+            'title' => $game->name.' Mission Execute - Covert Mission - Group game with a star wars theme',
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'game' => $game,
+            'player' => $player,
+            'leader' => Game::get_leader($game),
+            'team' => Game::get_team($game)
+        );
+        
+        $this->load->view('shared/_header.php', $this->view_data);
+        $this->load->view('missions/result', $this->view_data);
+        $this->load->view('shared/_footer.php', $this->view_data);
+    }
+    
+    
     // display mission page - players on the mission vote yes/no and 
     // others just have to wait.
     public function execute($slug=false) {
@@ -55,6 +113,27 @@ class Missions extends CI_Controller {
             $player->vote = false;
         }
         Game::update_player($game, $player);    
+        
+        // check success/fail
+        $vote_result = Game::check_mission_vote($game);
+        // when all players have acknowledged we redirect top relevant step
+        if ($vote_result == "Success") {
+           
+            // success - display result
+            Game::mission_success($game);
+            Game::save($game, $games_list); // save before redirect
+            redirect(Game::get_url($game));
+            return;
+            
+        } else if ($vote_result == "Fail") {
+           
+            // fail - display result
+            Game::mission_fail($game);
+            Game::save($game, $games_list); // save before redirect
+            redirect(Game::get_url($game));
+            return;
+            
+        }
         
         // finally save the game
         Game::save($game, $games_list);
@@ -118,7 +197,7 @@ class Missions extends CI_Controller {
         Game::update_player($game, $player);    
         
         // check success/fail
-        $vote_result = Game::check_vote($game);
+        $vote_result = Game::check_team_vote($game);
         // when all players have acknowledged we redirect top relevant step
         if (Game::all_players_state($game, 'mission-vote-acknowledge') == true) {
            
@@ -238,7 +317,7 @@ class Missions extends CI_Controller {
         Game::update_player($game, $player);    
         
         // check if we have all votes
-        if (Game::check_vote($game) != "Incomplete") {
+        if (Game::check_team_vote($game) != "Incomplete") {
             // update state to mission-vote to redirect to show result page
             $game->state = "mission-vote";
         }

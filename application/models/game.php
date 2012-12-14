@@ -8,6 +8,9 @@ class Game {
     var $players = array();
     var $current_mission = false;
     var $current_team = false;
+    var $success = 0;
+    var $fail = 0;
+    var $last_mission = false;
     
     // work out the correct url for viewing this game
     static function get_url_for_state($state, $slug) {
@@ -25,6 +28,8 @@ class Game {
             return '/missions/vote/'.$slug; 
         } else if ($state == 'mission-execute') {
             return '/missions/execute/'.$slug; 
+        } else if ($state == 'mission-result') {
+            return '/missions/result/'.$slug; 
         } else {
             return false;
         }    
@@ -80,8 +85,33 @@ class Game {
         $g->name = $name;
         $g->admin_name = $admin_name;
         $g->slug = Game::generate_slug($g->name);
-        $g->state = "joining";        
+        $g->state = "joining"; 
+        $g->success = 0;
+        $g->fail = 0;
+        $g->last_mission = false;
         return $g;
+    }
+    
+    // record mission success and move state, plus ready
+    // for next mission
+    static function mission_success($game) {
+        $game->state = "mission-result";
+        $game->success++;
+        $game->last_mission = "Success";
+        $game->next_team($game); // reset team and next leader
+        $game->current_team = 0;
+        $game->current_mission++;
+    }
+    
+    // record mission fail and move state, plus ready
+    // for next mission
+    static function mission_fail($game) {
+        $game->state = "mission-result";
+        $game->fail++;
+        $game->last_mission = "Fail";
+        $game->next_team($game); // reset team and next leader
+        $game->current_team = 0;
+        $game->current_mission++;        
     }
     
     // start mission, resets votes but thats it
@@ -91,7 +121,7 @@ class Game {
         }
     }
     
-    // next mission number, reset votes and new leader
+    // next team number, reset votes and new leader
     static function next_team($game) {
         $game->current_team++;
         $current_leader = false;
@@ -129,7 +159,31 @@ class Game {
     }
     
     // check if all players have voted and return vote result
-    static function check_vote($game) {
+    static function check_mission_vote($game) {
+        $not_voted = 0;
+        $voted_yes = 0;
+        $voted_no = 0;
+        $required_fails = Game::how_many_fails($game, $game->current_mission);
+        foreach ($game->players as $player) {
+            if ($player->vote == "Success") {
+                $voted_yes++;
+            } else if ($player->vote == "Fail") {
+                $voted_no++;
+            } else {
+                $not_voted++;
+            }
+        }
+        if ($not_voted > 0) {
+            return "Incomplete";
+        } else if ($voted_no >= $required_fails) {
+            return "Fail";
+        } else {
+            return "Success";
+        }
+    }
+    
+    // check if all players have voted and return vote result
+    static function check_team_vote($game) {
         $not_voted = 0;
         $voted_yes = 0;
         $voted_no = 0;
