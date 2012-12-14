@@ -85,9 +85,11 @@ class Game {
         foreach ($game->players as &$player) {
             if ($player->leader == true) {
                 $current_leader = true;
+                $player->leader = false;
             } else if ($current_leader == true) {
                 $player->leader = true;
                 $current_leader = false;
+                $game->leader_name = $player->name;
             } else {
                 $player->leader = false;
             }
