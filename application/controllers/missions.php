@@ -50,11 +50,22 @@ class Missions extends CI_Controller {
         if (Game::all_players_state($game, 'mission-vote-acknowledge') == true) {
            
            // fail 5th - Game Over
-           
-           // fail - next team leader
-           
-           // success - go to mission
+           if ($vote_result == "Rejected" && $game->current_team >= 5) {
+                $this->session->set_flashdata('error', 'TODO: Redirect to Game Over!'); 
+                redirect('/');
+               
+           } else if ($vote_result == "Rejected") {
+            // fail - next team leader
+            $game->state = "mission-selection";
+            Game::next_team($game);
+            redirect(Game::get_url($game));
             
+           } else if ($vote_result == "Approved") {
+            // success - go to mission
+            
+           } else {
+               $this->session->set_flashdata('error', 'Mission Vote Error: '.$vote_result);            
+           }
         }
         
         // finally save the game

@@ -77,6 +77,32 @@ class Game {
         return $g;
     }
     
+    // next mission number, reset votes and new leader
+    static function next_team($game) {
+        $game->current_mission++;
+        $game->current_team = false;
+        $current_leader = false;
+        foreach ($game->players as &$player) {
+            if ($player->leader == true) {
+                $current_leader = true;
+            } else if ($current_leader == true) {
+                $player->leader = true;
+                $current_leader = false;
+            } else {
+                $player->leader = false;
+            }
+            $player->team = false;
+            $player->vote = false;
+            $player->state = $game->state;
+        }
+        
+        // if we have still got the current leader then set to 1st player
+        if ($current_leader == true) {
+            $game->players[0]->leader = true;
+        }
+        
+    }
+    
     // gets the player data for the specified guid, returns false if not found
     static function get_player($game, $guid) {
         foreach ($game->players as $player) {
