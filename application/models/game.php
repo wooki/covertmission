@@ -165,12 +165,14 @@ class Game {
         $voted_no = 0;
         $required_fails = Game::how_many_fails($game, $game->current_mission);
         foreach ($game->players as $player) {
-            if ($player->vote == "Success") {
-                $voted_yes++;
-            } else if ($player->vote == "Fail") {
-                $voted_no++;
-            } else {
-                $not_voted++;
+            if ($player->state == "mission-execute") {
+                if ($player->vote == "Success") {
+                    $voted_yes++;
+                } else if ($player->vote == "Fail") {
+                    $voted_no++;
+                } else {
+                    $not_voted++;
+                }
             }
         }
         if ($not_voted > 0) {
