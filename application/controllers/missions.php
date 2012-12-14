@@ -61,7 +61,7 @@ echo "<p>".print_r($game->players, true)."</p>";
             // fail - next team leader
             $game->state = "mission-selection";
             Game::next_team($game);
-echo "REDIRECT!"            
+echo "REDIRECT!";
             redirect(Game::get_url($game));
             
            } else if ($vote_result == "Approved") {
