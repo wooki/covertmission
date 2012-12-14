@@ -20,9 +20,8 @@ class Missions extends CI_Controller {
             return;
         } else if ($game->state != 'mission-vote') {
             $this->session->set_flashdata('error', 'Game state has moved');
-            //redirect(Game::get_url($game), 'location'); 
-            //return;
-echo "<p>".$game->state."</p>";        
+            redirect(Game::get_url($game), 'location'); 
+            return;
         }
         
         // load current player
@@ -37,7 +36,6 @@ echo "<p>".$game->state."</p>";
     
         // first time player hits page set state, if they are posting back then update
         $postback = $this->input->post('postback');
-echo "<p>".$postback."</p>";        
         if ($postback == '1') {            
             $player->state = 'mission-vote-acknowledge';  
         } else {
@@ -47,9 +45,7 @@ echo "<p>".$postback."</p>";
         
         // check success/fail
         $vote_result = Game::check_vote($game);
-echo "<p>".print_r($vote_result, true)."</p>";        
         // when all players have acknowledged we redirect top relevant step
-echo "<p>".print_r($game->players, true)."</p>";        
         if (Game::all_players_state($game, 'mission-vote-acknowledge') == true) {
            
            // fail 5th - Game Over
@@ -61,15 +57,18 @@ echo "<p>".print_r($game->players, true)."</p>";
             // fail - next team leader
             $game->state = "mission-selection";
             Game::next_team($game);
-echo "REDIRECT!";
-//            redirect(Game::get_url($game));
+            Game::save($game, $games_list); // save before redirect
+            redirect(Game::get_url($game));
+            return;
             
            } else if ($vote_result == "Approved") {
             // success - go to mission
             
            } else {
                $this->session->set_flashdata('error', 'Mission Vote Error: '.$vote_result);            
+               Game::save($game, $games_list); // save before redirect
                redirect('/');
+               return;
            }
         }
         
