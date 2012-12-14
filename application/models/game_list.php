@@ -21,7 +21,7 @@ class Game_List {
         $json_data = json_encode($this->games);
 echo "<p style=\"background: #bada55;\">".$json_data."</p>";     
         
-        return write_file($this->games_list_file_path, $json_data, 'r');
+        return write_file($this->games_list_file_path, $json_data, 'w');
     }    
     
     function update_game($game) {
