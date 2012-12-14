@@ -36,7 +36,7 @@ class Missions extends CI_Controller {
     
         // first time player hits page set state, if they are posting back then update
         $postback = $this->input->post('postback');
-echo "<p>".print_r($postback, true)."</p>";        
+echo "<p>".$postback."</p>";        
         if ($postback == '1') {            
             $player->state = 'mission-vote-acknowledge';  
         } else {
