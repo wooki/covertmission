@@ -19,6 +19,7 @@
             <?php } ?>
             
             <? if ($player->state == 'mission-execute') { ?>
+            <? if ($player->vote == false) { ?>
             <?= form_open('missions/execute/'.$game->slug, array('class' => 'execute')) ?>
                 <?= form_hidden('execute', ''); ?>
                   
@@ -39,6 +40,9 @@
 
             </form>            
             <? } else { ?>
+            <p>Please wait while the rest of the team vote.</p>
+            <? }
+            } else { ?>
             <p>Please wait while the team conduct the mission.</p>
             <? } ?>
         </div>

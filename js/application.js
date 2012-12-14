@@ -35,6 +35,19 @@ var covertmission = function() {
             $.backstretch("/img/bg.jpg");
         }
         
+        // execute requires one of approve/reject button 
+        $('form.execute').submit(function(event) {
+            var selected_count = $('.btn-group button.active').length;
+            if (selected_count != 1) {
+                event.preventDefault();
+                $('.validation-message').addClass('alert alert-error').html("Please select either Succeed or Fail");
+            } else {
+                $('.btn-group button.active').each(function(key, item) {
+                    $('input[name=execute]').val($(item).text());
+                });                
+            }
+        });
+        
         // vote requires one of approve/reject button 
         $('form.vote').submit(function(event) {
             var selected_count = $('.btn-group button.active').length;

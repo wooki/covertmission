@@ -43,13 +43,18 @@ class Missions extends CI_Controller {
                 $player->state = 'mission-execute';  
             }             
         }        
-        Game::update_player($game, $player);    
         
         // if we have a mission execute player and a postback
         // see what they have voted.
-///////////////////////////        
-///////////////////////////
-///////////////////////////
+        if ($player->state == "mission-execute") {
+            $execute = $this->input->post('execute');
+            if ($execute != false) {
+                $player->vote = $execute;                
+            }
+        } else {
+            $player->vote = false;
+        }
+        Game::update_player($game, $player);    
         
         // finally save the game
         Game::save($game, $games_list);
