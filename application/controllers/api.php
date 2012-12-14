@@ -21,11 +21,21 @@ class Api extends CI_Controller {
                 $game_url = '';
             }
             
+            // load current player
+            $guid = $this->session->userdata('player_id');
+            $player = Game::get_player($game, $guid);
+    
+            if ($player != false) {
+            }
+            
             // special case to ensure players have to manually move past
             // the role assignment page
             if ($game->state == "starting" &&
                 Game::all_players_state($game, 'joining') == false) {
                 $game_url = '';
+            } else if ($game->state == "mission-selection" && 
+                       $player->state == "mission-approve") {
+                $game_url = Game::get_url_for_state("mission-approve", $game->slug);
             }
             
             echo json_encode(array(

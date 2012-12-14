@@ -10,22 +10,27 @@ class Game {
     var $current_team = false;
     
     // work out the correct url for viewing this game
-    static function get_url($game) {
-        if ($game->state == 'joining') {
-            return '/games/lobby/'.$game->slug; 
-        } else if ($game->state == 'starting') {
-            return '/games/start/'.$game->slug; 
-        } else if ($game->state == 'mission-selection') {
-            return '/missions/selection/'.$game->slug; 
-        } else if ($game->state == 'mission-approve') {
-            return '/missions/approve/'.$game->slug; 
-        } else if ($game->state == 'mission-vote') {
-            return '/missions/vote/'.$game->slug; 
-        } else if ($game->state == 'mission-vote-acknowledge') {
-            return '/missions/vote/'.$game->slug; 
+    static function get_url_for_state($state, $slug) {
+        if ($state == 'joining') {
+            return '/games/lobby/'.$slug; 
+        } else if ($state == 'starting') {
+            return '/games/start/'.$slug; 
+        } else if ($state == 'mission-selection') {
+            return '/missions/selection/'.$slug; 
+        } else if ($state == 'mission-approve') {
+            return '/missions/approve/'.$slug; 
+        } else if ($state == 'mission-vote') {
+            return '/missions/vote/'.$slug; 
+        } else if ($state == 'mission-vote-acknowledge') {
+            return '/missions/vote/'.$slug; 
         } else {
             return false;
         }    
+    }
+    
+    // util for calling the above function
+    static function get_url($game) {
+        return Game::get_url_for_state($game->state, $game->slug);
     }
     
     // work out how many spies there should be
