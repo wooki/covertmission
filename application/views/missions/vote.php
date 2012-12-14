@@ -13,21 +13,23 @@
             
             <p>Mission leader <?= $game->current_team+1 ?> is: <?= player_label($leader->name) ?></p>
             
-            <p>Team leader has picked:</p>
+            <p>Team leader has picked:
             <?php foreach ($team as $p) { ?>
                 <?= player_label($p->name) ?>
             <?php } ?>
+            </p>
             
             <?= form_open('missions/vote/'.$game->slug, array('class' => 'vote-acknowledge')) ?>
                 <?= form_hidden('postback', '1'); ?>
                   
                 <p>Acknowledge vote result: <span class="label label-info"><?= $vote_result ?></span></p>
                 
-                <p>The following players voted against the team selection:</p>
+                <p>The following players voted against the team selection:
                 <?php foreach ($game->players as $p) { ?>
                     <?php if ($p->vote == "Reject") { ?><?= player_label($p->name) ?>
                     <?php } ?>
                 <?php } ?>
+                </p>
                 
                 <?php if ($player->state == "mission-vote") { ?>
                 <button type="submit" class="btn btn-primary btn-large">Acknowledge</button>
