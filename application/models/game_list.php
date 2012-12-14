@@ -18,7 +18,7 @@ class Game_List {
     // save to disc, as json
     function save() {
         $json_data = json_encode($this->games);
-        return write_file($this->games_list_file_path, $json_data);
+        return write_file($this->games_list_file_path, $json_data, 'r');
     }    
     
     function update_game($game) {
@@ -26,9 +26,7 @@ class Game_List {
         foreach ($this->games as &$g) {
             if ($game->slug == $g->slug) {
                 $updated = true;
-echo "<p>".$g->state." = ".$game->state."</p>";                
                 $g = $game;
-echo "<p>".$g->state."</p>";                
             }
         }
         if ($updated == false) {

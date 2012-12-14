@@ -11,7 +11,7 @@
             
             <p class="alert alert-info game_state">Waiting for player votes</p>
             
-            <p>Mission leader is: <?= player_label($leader->name) ?></p>
+            <p>Mission leader <?= $game->current_team+1) ?> is: <?= player_label($leader->name) ?></p>
             
             <p>Team leader has picked:</p>
             <?php foreach ($team as $p) { ?>

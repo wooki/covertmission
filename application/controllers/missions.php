@@ -166,10 +166,8 @@ echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";
             $game->state = "mission-vote";
         }
 
-echo "<p style=\"background: #cff;\">".print_r($game, true)."</p>";        
         // finally save the game
-        echo "<p>Save: ".Game::save($game, $games_list)."</p>";
-echo "<p style=\"background: #fcf;\">".print_r($game, true)."</p>";        
+        Game::save($game, $games_list);
         
         // set view data
         $this->view_data = array(
@@ -238,7 +236,6 @@ echo "<p style=\"background: #fcf;\">".print_r($game, true)."</p>";
         if (Game::all_players_state($game, 'mission-selection') == true) {
             $game->state = 'mission-selection';            
         }
-echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";
 
         Game::save($game, $games_list);
         
