@@ -153,16 +153,12 @@ class Missions extends CI_Controller {
         
         // set the players vote IF there is one
         $vote = $this->input->post('vote');
-echo "<p style=\"background: #fcf;\">".$vote."</p>";     
         if ($vote != false) {
             $player->vote = $vote;
         }
         Game::update_player($game, $player);    
-echo "<p style=\"background: #ffc;\">".print_r($game, true)."</p>";     
-        
         
         // check if we have all votes
-echo "<p style=\"background: #fff;\">".Game::check_vote($game)."</p>";     
         if (Game::check_vote($game) != "Incomplete") {
             // update state to mission-vote to redirect to show result page
             $game->state = "mission-vote";
@@ -170,7 +166,6 @@ echo "<p style=\"background: #fff;\">".Game::check_vote($game)."</p>";
 
         // finally save the game
         if (Game::save($game, $games_list) == false) {
-echo "<p style=\"background: #ffc;\">SAVE FAILED</p>";     
         };
         
         // set view data
