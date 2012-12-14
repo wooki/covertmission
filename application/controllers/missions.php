@@ -20,8 +20,9 @@ class Missions extends CI_Controller {
             return;
         } else if ($game->state != 'mission-vote') {
             $this->session->set_flashdata('error', 'Game state has moved');
-            redirect(Game::get_url($game), 'location'); 
-            return;
+            //redirect(Game::get_url($game), 'location'); 
+            //return;
+echo "<p>".$game->state."</p>";        
         }
         
         // load current player
