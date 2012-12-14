@@ -10,6 +10,10 @@ var covertmission = function() {
             return 'Waiting for team leader';
         } else if (state == 'mission-approve') {
             return 'Waiting for player votes';
+        } else if (state == 'mission-vote') {
+            return 'Mission vote complete';
+        } else if (state == 'mission-vote-acknowledge') {
+            return 'Waiting for all players';
         } else {
             return 'Unknown state: '+state;
         }

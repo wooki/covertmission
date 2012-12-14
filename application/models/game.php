@@ -19,6 +19,10 @@ class Game {
             return '/missions/selection/'.$game->slug; 
         } else if ($game->state == 'mission-approve') {
             return '/missions/approve/'.$game->slug; 
+        } else if ($game->state == 'mission-vote') {
+            return '/missions/vote/'.$game->slug; 
+        } else if ($game->state == 'mission-vote-acknowledge') {
+            return '/missions/vote/'.$game->slug; 
         } else {
             return false;
         }    
@@ -81,6 +85,29 @@ class Game {
             }
         }
         return false;
+    }
+    
+    // check if all players have voted and return vote result
+    static function check_vote($game) {
+        $not_voted = 0;
+        $voted_yes = 0;
+        $voted_no = 0;
+        foreach ($game->players as $player) {
+            if ($player->vote == "Approve") {
+                $voted_yes++;
+            } else if ($player->vote == "Reject") {
+                $voted_no++;
+            } else {
+                $not_voted++;
+            }
+        }
+        if ($not_voted > 0) {
+            return "Incomplete";
+        } else if ($voted_yes > $voted_no) {
+            return "Approved";
+        } else {
+            return "Rejected";
+        }
     }
     
     // check if all players are in the specified state
