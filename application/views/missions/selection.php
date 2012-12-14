@@ -11,7 +11,7 @@
             
             <p class="alert alert-info game_state">Waiting for team leader</p>
             
-            <p>Mission leader is: <?= player_label($leader->name) ?></p>
+            <p>Mission leader <?= $game->current_team+1 ?> is: <?= player_label($leader->name) ?></p>
             
             <?php if ($player->leader === true) { ?>            
             <?= form_open('missions/approve/'.$game->slug, array('class' => 'set-team')) ?>

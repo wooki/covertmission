@@ -84,8 +84,7 @@ class Game {
     
     // next mission number, reset votes and new leader
     static function next_team($game) {
-        $game->current_mission++;
-        $game->current_team = false;
+        $game->current_team++;
         $current_leader = false;
         foreach ($game->players as &$player) {
             if ($player->leader == true) {
