@@ -21,7 +21,7 @@
             <?= form_open('missions/vote/'.$game->slug, array('class' => 'vote-acknowledge')) ?>
                 <?= form_hidden('postback', '1'); ?>
                   
-                <p>Acknowledge vote result</p>
+                <p>Acknowledge vote result: <span class="label label-info"><?= $vote_result ?></span></p>
                 
                 <p class="validation-message">&nbsp;</p>
                 
