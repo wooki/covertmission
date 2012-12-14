@@ -47,6 +47,7 @@ class Missions extends CI_Controller {
         $vote_result = Game::check_vote($game);
         
         // when all players have acknowledged we redirect top relevant step
+echo "<p>".print_r($game->players, true)."</p>";        
         if (Game::all_players_state($game, 'mission-vote-acknowledge') == true) {
            
            // fail 5th - Game Over
