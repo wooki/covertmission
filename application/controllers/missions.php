@@ -65,6 +65,7 @@ class Missions extends CI_Controller {
             
            } else {
                $this->session->set_flashdata('error', 'Mission Vote Error: '.$vote_result);            
+               redirect('/');
            }
         }
         
