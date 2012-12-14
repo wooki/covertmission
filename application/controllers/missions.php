@@ -58,9 +58,20 @@ class Missions extends CI_Controller {
         }
         
         // update players state to acknowledge they are on this page
-        $player->state = 'mission-approve';      
-        Game::update_player($game, $player);
-    
+        $player->state = 'mission-approve';  
+        
+        // set the players vote IF there is one
+        $vote = $this->post('vote');
+        if ($vote != false) {
+            $player->vote = $vote;
+        }
+        Game::update_player($game, $player);    
+        
+        
+        // check if we have all votes
+        if 
+        
+        // finally save the game
         Game::save($game, $games_list);
         
         // set view data

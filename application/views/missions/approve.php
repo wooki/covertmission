@@ -19,7 +19,7 @@
             <?php } ?>
             
             <? if ($player->vote == '') { ?>
-            <?= form_open('missions/vote/'.$game->slug, array('class' => 'vote')) ?>
+            <?= form_open('missions/approve/'.$game->slug, array('class' => 'vote')) ?>
                 <?= form_hidden('vote', ''); ?>
                   
                 <p>Vote to approve or reject the leaders team</p>
