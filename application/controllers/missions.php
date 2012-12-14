@@ -165,9 +165,11 @@ echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";
             // update state to mission-vote to redirect to show result page
             $game->state = "mission-vote";
         }
-        
+
+echo "<p style=\"background: #cff;\">".print_r($game, true)."</p>";        
         // finally save the game
         Game::save($game, $games_list);
+echo "<p style=\"background: #fcf;\">".print_r($game, true)."</p>";        
         
         // set view data
         $this->view_data = array(
