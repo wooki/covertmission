@@ -68,7 +68,7 @@ class Missions extends CI_Controller {
             'game' => $game,
             'player' => $player,
             'leader' => Game::get_leader($game),
-            'team' => $team,
+            'team' => Game::get_team($game),
             'vote_result' => $vote_result
         );
         
