@@ -24,7 +24,7 @@
                 <p>Acknowledge vote result: <span class="label label-info"><?= $vote_result ?></span></p>
                 
                 <p>The following players voted against the team selection:</p>
-                <?php foreach ($player as $p) { ?>
+                <?php foreach ($game->players as $p) { ?>
                     <?php if ($p->vote == "Reject") { ?><?= player_label($p->name) ?>
                     <?php } ?>
                 <?php } ?>
