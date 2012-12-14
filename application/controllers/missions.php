@@ -224,10 +224,10 @@ class Missions extends CI_Controller {
         }
         
         // when the first person hits this page set the mission index
-        if ($game->current_mission = false) {
+        if ($game->current_mission == false) {
             $game->current_mission = 0;                        
             $game->current_team = 0;
-        } else if ($game->current_team = false) {
+        } else if ($game->current_team == false) {
             $game->current_team = 0;
         }
         
