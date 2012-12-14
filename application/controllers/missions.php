@@ -37,10 +37,10 @@ class Missions extends CI_Controller {
         // when players initially arrive update their state, depending if they
         // are onthe mission or not
         if ($player->state == 'mission-vote-acknowledge') {            
-            if ($player-team == true) {
-                $player->state = 'mission-execute';  
-            } else {
+            if ($player->team === false) {
                 $player->state = 'mission-watch';  
+            } else {
+                $player->state = 'mission-execute';  
             }             
         }        
         Game::update_player($game, $player);    

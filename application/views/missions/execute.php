@@ -28,6 +28,8 @@
                 <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button">Succeed</button>
                 <?php if ($player->role == "Rebel Spy") { ?>
                 <button style="margin-bottom: 0.5em;" type="button" class="btn btn-large" data-toggle="button">Fail</button>
+                <?php } else { ?>
+                (only Rebels can fail a mission)
                 <?php } ?>
                 </div>
                 
