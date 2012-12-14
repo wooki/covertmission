@@ -17,7 +17,7 @@ class Game_List {
 
     // save to disc, as json
     function save() {
-echo "<p style=\"background: #55bada;\">".print_r($games, true)."</p>";     
+echo "<p style=\"background: #55bada;\">".print_r($this->games, true)."</p>";     
         $json_data = json_encode($this->games);
 echo "<p style=\"background: #bada55;\">".$json_data."</p>";     
         
