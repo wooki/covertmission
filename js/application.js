@@ -14,6 +14,8 @@ var covertmission = function() {
             return 'Mission vote complete';
         } else if (state == 'mission-vote-acknowledge') {
             return 'Waiting for all players';
+        } else if (state == 'mission-execute') {
+            return 'Waiting for mission to finish';
         } else {
             return 'Unknown state: '+state;
         }

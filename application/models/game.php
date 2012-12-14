@@ -23,6 +23,8 @@ class Game {
             return '/missions/vote/'.$slug; 
         } else if ($state == 'mission-vote-acknowledge') {
             return '/missions/vote/'.$slug; 
+        } else if ($state == 'mission-execute') {
+            return '/missions/execute/'.$slug; 
         } else {
             return false;
         }    

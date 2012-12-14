@@ -1,6 +1,73 @@
 <?php
 class Missions extends CI_Controller {
+    
+    // display mission page - players on the mission vote yes/no and 
+    // others just have to wait.
+    public function execute($slug=false) {
+        
+        if ($slug == false) { show_404('page'); }
+        
+        // load the game
+        $this->load->helper('form');
+        $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
+        $game = Game::load($slug, $games_list);
+        
+        if ($game == false) {
+            $this->session->set_flashdata('error', 'Game does not exist');
+            redirect('/', 'location'); 
+            return;
+        } else if ($game->state != 'mission-execute') {
+            $this->session->set_flashdata('error', 'Game state has moved');
+            redirect(Game::get_url($game), 'location'); 
+            return;
+        }
+        
+        // load current player
+        $guid = $this->session->userdata('player_id');
+        $player = Game::get_player($game, $guid);
 
+        if ($player == false) {
+            $this->session->set_flashdata('error', 'You are not a player in that game');
+            redirect('/', 'location'); 
+            return;
+        }
+    
+        // when players initially arrive update their state, depending if they
+        // are onthe mission or not
+        if ($player->state == 'mission-vote-acknowledge') {            
+            if ($player-team == true) {
+                $player->state = 'mission-execute';  
+            } else {
+                $player->state = 'mission-watch';  
+            }             
+        }        
+        Game::update_player($game, $player);    
+        
+        // if we have a mission execute player and a postback
+        // see what they have voted.
+        
+        
+        // finally save the game
+        Game::save($game, $games_list);
+        
+        // set view data
+        $this->view_data = array(
+            'title' => $game->name.' Mission Execute - Covert Mission - Group game with a star wars theme',
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'game' => $game,
+            'player' => $player,
+            'leader' => Game::get_leader($game),
+            'team' => Game::get_team($game)
+        );
+        
+        $this->load->view('shared/_header.php', $this->view_data);
+        $this->load->view('missions/execute', $this->view_data);
+        $this->load->view('shared/_footer.php', $this->view_data);
+    }
+    
+    
     // display mission vote result and wait for final Continue click from players
     // where we either revert to new leader and vote or go to the mission.
     public function vote($slug=false) {
@@ -49,7 +116,7 @@ class Missions extends CI_Controller {
         if (Game::all_players_state($game, 'mission-vote-acknowledge') == true) {
            
            // fail 5th - Game Over
-           if ($vote_result == "Rejected" && $game->current_team >= 5) {
+           if ($vote_result == "Rejected" && $game->current_team >= 4) {
                 $this->session->set_flashdata('error', 'TODO: Redirect to Game Over!'); 
                 redirect('/');
                
@@ -63,6 +130,11 @@ class Missions extends CI_Controller {
             
            } else if ($vote_result == "Approved") {
             // success - go to mission
+            $game->state = "mission-execute";
+            Game::start_mission($game);
+            Game::save($game, $games_list); // save before redirect
+            redirect(Game::get_url($game));
+            return;
             
            } else {
                $this->session->set_flashdata('error', 'Mission Vote Error: '.$vote_result);            
