@@ -138,7 +138,7 @@ class Missions extends CI_Controller {
         $player->state = 'mission-approve';  
         
         // set the players vote IF there is one
-        $vote = $this->post('vote');
+        $vote = $this->input->post('vote');
         if ($vote != false) {
             $player->vote = $vote;
         }
