@@ -160,6 +160,7 @@ class Missions extends CI_Controller {
         
         
         // check if we have all votes
+echo "<p style=\"background: #fff;\">".Game::check_vote($game)."</p>";     
         if (Game::check_vote($game) != "Incomplete") {
             // update state to mission-vote to redirect to show result page
             $game->state = "mission-vote";
