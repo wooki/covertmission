@@ -227,12 +227,16 @@ class Missions extends CI_Controller {
         if ($game->current_mission = false) {
             $game->current_mission = 0;                        
             $game->current_team = 0;
+        } else if ($game->current_team = false) {
+            $game->current_team = 0;
         }
         
         // when the last player reaches this point update game status
         if (Game::all_players_state($game, 'mission-selection') == true) {
             $game->state = 'mission-selection';            
         }
+echo "<p>".print_r($game, true)."</p>";
+
         Game::save($game, $games_list);
         
         // set view data
