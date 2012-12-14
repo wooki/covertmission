@@ -153,10 +153,12 @@ class Missions extends CI_Controller {
         
         // set the players vote IF there is one
         $vote = $this->input->post('vote');
+echo "<p style=\"background: #fcf;\">".$vote."</p>";     
         if ($vote != false) {
             $player->vote = $vote;
         }
         Game::update_player($game, $player);    
+echo "<p style=\"background: #ffc;\">".print_r($game, true)."</p>";     
         
         
         // check if we have all votes
