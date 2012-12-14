@@ -112,8 +112,10 @@ class Missions extends CI_Controller {
             return;
         } else if ($game->state != 'mission-selection' && $game->state != 'mission-approve') {
             $this->session->set_flashdata('error', 'Game state has moved');
-            redirect(Game::get_url($game), 'location'); 
-            return;
+            //redirect(Game::get_url($game), 'location'); 
+            //return;
+echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";
+            
         }
         
         // load current player
@@ -235,7 +237,7 @@ class Missions extends CI_Controller {
         if (Game::all_players_state($game, 'mission-selection') == true) {
             $game->state = 'mission-selection';            
         }
-echo "<p>".print_r($game, true)."</p>";
+echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";
 
         Game::save($game, $games_list);
         
