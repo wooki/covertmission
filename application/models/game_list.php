@@ -26,7 +26,9 @@ class Game_List {
         foreach ($this->games as &$g) {
             if ($game->slug == $g->slug) {
                 $updated = true;
+echo "<p>".$g->state." = ".$game->state."</p>";                
                 $g = $game;
+echo "<p>".$g->state."</p>";                
             }
         }
         if ($updated == false) {
