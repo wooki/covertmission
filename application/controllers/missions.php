@@ -62,7 +62,7 @@ echo "<p>".print_r($game->players, true)."</p>";
             $game->state = "mission-selection";
             Game::next_team($game);
 echo "REDIRECT!";
-            redirect(Game::get_url($game));
+//            redirect(Game::get_url($game));
             
            } else if ($vote_result == "Approved") {
             // success - go to mission
