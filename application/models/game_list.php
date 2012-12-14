@@ -18,6 +18,8 @@ class Game_List {
     // save to disc, as json
     function save() {
         $json_data = json_encode($this->games);
+echo "<p style=\"background: #bada55;\">".$json_data"</p>";     
+        
         return write_file($this->games_list_file_path, $json_data, 'r');
     }    
     
