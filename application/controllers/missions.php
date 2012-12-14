@@ -168,7 +168,7 @@ echo "<p style=\"background: #fff;\">".print_r($game, true)."</p>";
 
 echo "<p style=\"background: #cff;\">".print_r($game, true)."</p>";        
         // finally save the game
-        Game::save($game, $games_list);
+        echo "<p>Save: ".Game::save($game, $games_list)."</p>";
 echo "<p style=\"background: #fcf;\">".print_r($game, true)."</p>";        
         
         // set view data
