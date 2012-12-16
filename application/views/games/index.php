@@ -13,8 +13,8 @@
         <div class="span12 game-cmd">
             <?php foreach($games as $game) { 
                 if (count($game->players) < 10) {
-<p>BUID: <?= $guid ?></p>
-<p><?= print_r($game->players, true) ?></p>
+?><p>BUID: <?= $guid ?></p>
+<p><?= print_r($game->players, true) ?></p><?php
                 $p = Game::get_player($game, $guid);
                 if ($p != false) { ?>
             <a class="btn btn-success btn-large" href="<?= Game::get_url($game) ?>"><?= $game->name ?></a>
