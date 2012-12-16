@@ -84,8 +84,10 @@ var covertmission = function() {
             // <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
             setInterval(function() {
                 
+                var $game_slug = $('body[data-game]').attr("data-game");
+                
                 $.ajax({
-                   url: '/api/state/test',
+                   url: '/api/state/'+$game_slug,
                    error: function(xhr, textStatus, error) {
                        $('.game_state').html('Error: '+textStatus);
                    },
