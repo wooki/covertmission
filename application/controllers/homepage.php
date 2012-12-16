@@ -9,7 +9,8 @@ class Homepage extends CI_Controller {
         $this->view_data = array(
             'title' => 'Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
-            'error' => $error
+            'error' => $error,
+            'game_name' => ''
         );
         
         $this->load->view('shared/_header.php', $this->view_data);

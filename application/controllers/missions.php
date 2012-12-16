@@ -50,7 +50,8 @@ class Missions extends CI_Controller {
             'game' => $game,
             'player' => $player,
             'leader' => Game::get_leader($game),
-            'team' => Game::get_team($game)
+            'team' => Game::get_team($game),
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -145,7 +146,8 @@ class Missions extends CI_Controller {
             'game' => $game,
             'player' => $player,
             'leader' => Game::get_leader($game),
-            'team' => Game::get_team($game)
+            'team' => Game::get_team($game),
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -241,7 +243,8 @@ class Missions extends CI_Controller {
             'player' => $player,
             'leader' => Game::get_leader($game),
             'team' => Game::get_team($game),
-            'vote_result' => $vote_result
+            'vote_result' => $vote_result,
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -333,7 +336,8 @@ class Missions extends CI_Controller {
             'game' => $game,
             'player' => $player,
             'leader' => Game::get_leader($game),
-            'team' => $team
+            'team' => $team,
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -403,7 +407,8 @@ class Missions extends CI_Controller {
             'game' => $game,
             'player' => $player,
             'leader' => Game::get_leader($game),
-            'team_size' => Game::how_many_agents($game, $game->current_mission)
+            'team_size' => Game::how_many_agents($game, $game->current_mission),
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);

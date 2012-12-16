@@ -9,5 +9,5 @@
     <link href="/css/application.css" rel="stylesheet" media="screen">    
 </head>
 
-<body>
+<body data-game="<?= $game_name ?>">
 

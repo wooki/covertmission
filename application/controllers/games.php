@@ -13,7 +13,8 @@ class Games extends CI_Controller {
             'title' => 'Joinable Games - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'games' => $games_list->games,
-            'guid' => $guid
+            'guid' => $guid,
+            'game_name' => ''
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -84,7 +85,8 @@ class Games extends CI_Controller {
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
                 'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
                 'game' => $game,
-                'player' => $player
+                'player' => $player,
+                'game_name' => $game->slug
             );
             
             $this->load->view('shared/_header.php', $this->view_data);
@@ -112,7 +114,8 @@ class Games extends CI_Controller {
                 'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
                 'game' => $game,
                 'player' => $player,
-                'spies' => Game::get_spies($game)
+                'spies' => Game::get_spies($game),
+                'game_name' => $game->slug
             );
             
             $this->load->view('shared/_header.php', $this->view_data);
@@ -196,7 +199,8 @@ class Games extends CI_Controller {
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'game' => $game,
             'player_name' => $player_name,
-            'message' => $message
+            'message' => $message,
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -237,7 +241,8 @@ class Games extends CI_Controller {
             'title' => $game->name.' Lobby - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'game' => $game,
-            'player' => $player
+            'player' => $player,
+            'game_name' => $game->slug
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
@@ -320,7 +325,8 @@ class Games extends CI_Controller {
             'message' => $message,
             'game' => $game,
             'title' => 'New Game - Covert Mission - Group game with a star wars theme',
-            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.'
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'game_name' => $game->slug            
         );
         
         $this->load->view('shared/_header.php', $this->view_data);
