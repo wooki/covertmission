@@ -98,7 +98,7 @@ class Game {
         $game->state = "mission-result";
         $game->success++;
         $game->last_mission = "Success";
-        $game->next_team($game); // reset team and next leader
+        Game::next_team($game); // reset team and next leader
         $game->current_team = 0;
         $game->current_mission++;
     }
@@ -109,7 +109,7 @@ class Game {
         $game->state = "mission-result";
         $game->fail++;
         $game->last_mission = "Fail";
-        $game->next_team($game); // reset team and next leader
+        Game::next_team($game); // reset team and next leader
         $game->current_team = 0;
         $game->current_mission++;        
     }
