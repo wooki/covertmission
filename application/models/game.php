@@ -30,6 +30,8 @@ class Game {
             return '/missions/execute/'.$slug; 
         } else if ($state == 'mission-result') {
             return '/missions/result/'.$slug; 
+        } else if ($state == 'game-over') {
+            return '/'.$slug; 
         } else {
             return false;
         }    
@@ -54,7 +56,7 @@ class Game {
             array(3, 3, 4, 5, 5, 5),
             array(3, 4, 4, 5, 5, 5)
         );
-        return $agents[$mission_index][count($game->players)];
+        return $agents[$mission_index][count($game->players)-5];
     }
     
     // work out how many fail cards are required
@@ -66,7 +68,7 @@ class Game {
             array(1, 1, 2, 2, 2, 2),
             array(1, 1, 1, 1, 1, 1)            
         );
-        return $agents[$mission_index][count($game->players)];
+        return $agents[$mission_index][count($game->players)-5];
     }
     
     // load from disc, from json file
