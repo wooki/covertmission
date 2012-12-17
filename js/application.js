@@ -29,7 +29,7 @@ var covertmission = function() {
     $(document).ready(function() {
         
         // set the background depending on player role        
-        if ($('.player').length) {
+        if ($('.player[data-role]').length) {
             if ($('.player').attr('data-role') == "Imperial Officer") {
                 $.backstretch("/img/texture-empire.jpg");
             } else {
