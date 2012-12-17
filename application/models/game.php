@@ -175,6 +175,10 @@ class Game {
                 }
             }
         }
+echo "<p>voted_yes: ".$voted_yes."</p>";        
+echo "<p>voted_no: ".$voted_no."</p>";        
+echo "<p>not_voted: ".$not_voted."</p>";        
+echo "<p>required_fails: ".$required_fails."</p>";        
         if ($not_voted > 0) {
             return "Incomplete";
         } else if ($voted_no >= $required_fails) {
