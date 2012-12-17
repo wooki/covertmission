@@ -22,19 +22,10 @@
                 <p>Note: Rebel Spies will know who each other are!</p>
             <?php } ?>
             
-            <p>You
-            must complete 3 our of the 5 missions that you will be set to win the game.</p>
+            <p>Each mission will have a team leader that selects the team - you may approve or
+            reject this team.</p>
             
-            <p>A team leader will be assigned for each mission and they then select the operatives to 
-            take part in the mission. Not every player
-            will be sent on each mission. Once the mission team has been assembled all players vote to 
-            accept or reject the team.</p>
-            
-            <p>If the team is rejected a new team leader will be selected and a new team assembled. If the 
-            mission is accepted then the operatives will attempt
-            to complete the mission. Spies will try to saboutage the mission.</p>
-            
-            <p>Note that five rejected teams in a row will automatically lead to a win to the Rebel Spies.</p>
+            <p>Remember, you must complete 3 our of the 5 missions to win the game.</p>
             
             <?= form_open('missions/selection/'.$game->slug) ?>
                 <fieldset>
