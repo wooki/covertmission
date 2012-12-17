@@ -35,8 +35,19 @@ class Missions extends CI_Controller {
         }
     
         // when players initially arrive update their state, depending if they
-        // are onthe mission or not
-        $player->state = 'mission-result';  
+        // are onthe mission or not, if they post the acknowledgement then change to that
+        $postback = $this->input->post('postback');
+        if ($postback == "acknowledge" && $player->state = 'mission-result') {
+            $player->state = 'mission-result-acknowledge';
+        } else {
+            $player->state = 'mission-result';  
+        }
+        
+        // once all players have acknowledged, either go to next mission
+        // or delete the game
+        if (Game::all_players_state($game, 'mission-result-acknowledge') == true) {
+            echo "<p style='background: #fff'>acknowledge</p>";
+        }
         
         Game::update_player($game, $player);    
         
@@ -45,7 +56,7 @@ class Missions extends CI_Controller {
         
         // set view data
         $this->view_data = array(
-            'title' => $game->name.' Mission Execute - Covert Mission - Group game with a star wars theme',
+            'title' => $game->name.' Mission '.$game->last_mission.' - Covert Mission - Group game with a star wars theme',
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'game' => $game,
             'player' => $player,
