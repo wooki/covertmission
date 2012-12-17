@@ -31,6 +31,16 @@ var covertmission = function() {
         // set the background depending on player role        
         if ($('.player').length) {
             if ($('.player').attr('data-role') == "Imperial Officer") {
+                $.backstretch("/img/texture-empire.jpg");
+            } else {
+                $.backstretch("/img/texture-rebel.jpg");
+            }            
+        } else {
+            $.backstretch("/img/texture-empire.jpg");
+        }
+        /*
+        if ($('.player').length) {
+            if ($('.player').attr('data-role') == "Imperial Officer") {
                 $.backstretch("/img/imperial-bg.jpg");
             } else {
                 $.backstretch("/img/rebels-bg.jpg");
@@ -38,7 +48,7 @@ var covertmission = function() {
         } else {
             $.backstretch("/img/bg.jpg");
         }
-        
+        */
         // execute requires one of approve/reject button 
         $('form.execute').submit(function(event) {
             var selected_count = $('.btn-group button.active').length;
