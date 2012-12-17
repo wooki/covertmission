@@ -46,7 +46,20 @@ class Missions extends CI_Controller {
         // once all players have acknowledged, either go to next mission
         // or delete the game
         if (Game::all_players_state($game, 'mission-result-acknowledge') == true) {
-            echo "<p style='background: #fff'>acknowledge</p>";
+            
+            // check if the game is over
+            if ($game->fail > 2 || $game->success > 2) {
+                // remove the game and return to the homepage
+                $games_list->remove_game($slug);
+                $this->session->set_flashdata('error', 'Thank you for playing');
+                redirect('/', 'location'); 
+                return;
+            } else {
+                // start next mission
+                redirect('/missions/selection/'.$game->slug, 'location'); 
+                return;
+            }
+            
         }
         
         Game::update_player($game, $player);    

@@ -21,6 +21,19 @@ class Game_List {
         return write_file($this->games_list_file_path, $json_data, 'w');
     }    
     
+    function remove_game($game) {
+        $remove_key = false;
+        foreach ($this->games as $key => $g) {
+            if ($game->slug == $g->slug) {
+                $remove_key = $key;
+            }
+        }
+        if ($remove_key != false) {
+            unset($this->games[$remove_key]);
+        }
+        return $this->save();
+    }
+    
     function update_game($game) {
         $updated = false;
         foreach ($this->games as &$g) {

@@ -12,11 +12,11 @@
             <p class="alert alert-info game_state">Waiting for all players</p>
             
             <h2>Score</h2>
-            <p>Empire: <?= $game->success ?></p>
-            <p>Rebels: <?= $game->fail ?></p>
+            <p>Empire: <span class="label label-inverse"><?= $game->success ?></span></p>
+            <p>Rebels: <span class="label label-important"><?= $game->fail ?></span></p>
             
             <?php if ($game->success > 2) { ?>
-                <h2>The Empire have won the game!</h2>
+                <h2><span class="label label-inverse">The Empire</span> have won the game!</h2>
                 <div class="players">Well done:
                 <?php foreach ($game->players as $p) { ?>
                 <?php if ($p->role == "Imperial Officer") { ?>
@@ -25,7 +25,7 @@
                 <?php } ?>
                 </div>                
             <?php } else if ($game->fail > 2) { ?>
-                <h2>The Rebels have won the game!</h2>
+                <h2><span class="label label-important">The Rebels</span> have won the game!</h2>
                 <div class="players">Well done:
                 <?php foreach ($game->players as $p) { ?>
                 <?php if ($p->role == "Rebel Spy") { ?>
