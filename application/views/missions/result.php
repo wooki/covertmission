@@ -11,7 +11,34 @@
             
             <p class="alert alert-info game_state">Waiting for all players</p>
             
+            <h2>Score</h2>
+            <p>Empire: <?= $game->success ?></p>
+            <p>Rebels: <?= $game->fail ?></p>
             
+            <?php if ($game->success > 2) { ?>
+                <h2>The Empire have won the game!</h2>
+                <div class="players">Well done:
+                <?php foreach ($game->players as $p) { ?>
+                <?php if ($p->role == "Imperial Officer") { ?>
+                <?= player_label($p->name) ?>
+                <?php } ?>
+                <?php } ?>
+                </div>                
+            <?php } else if ($game->fail > 2) { ?>
+                <h2>The Rebels have won the game!</h2>
+                <div class="players">Well done:
+                <?php foreach ($game->players as $p) { ?>
+                <?php if ($p->role == "Rebel Spy") { ?>
+                <?= player_label($p->name) ?>
+                <?php } ?>
+                <?php } ?>
+                </div>
+            <?php } ?>
+            
+            <?= form_open('missions/result/'.$game->slug) ?>
+                <?= form_hidden('postback', 'acknowledge'); ?>
+                <button type="submit" class="btn btn-primary btn-large">Continue</button>
+            </form>   
         </div>
         
     </div>
