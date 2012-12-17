@@ -17,7 +17,7 @@
             
             <?php if ($game->success > 2) { ?>
                 <h2><span class="label label-inverse">The Empire</span> have won the game!</h2>
-                <div class="players">Well done:
+                Well done:<div class="winners">
                 <?php foreach ($game->players as $p) { ?>
                 <?php if ($p->role == "Imperial Officer") { ?>
                 <?= player_label($p->name) ?>
@@ -26,7 +26,7 @@
                 </div>                
             <?php } else if ($game->fail > 2) { ?>
                 <h2><span class="label label-important">The Rebels</span> have won the game!</h2>
-                <div class="players">Well done:
+                Well done:<div class="winners">
                 <?php foreach ($game->players as $p) { ?>
                 <?php if ($p->role == "Rebel Spy") { ?>
                 <?= player_label($p->name) ?>
