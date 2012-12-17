@@ -56,6 +56,8 @@ class Missions extends CI_Controller {
                 return;
             } else {
                 // start next mission
+                $game->state = "mission-selection";
+                Game::save($game, $games_list);
                 redirect('/missions/selection/'.$game->slug, 'location'); 
                 return;
             }
