@@ -51,6 +51,7 @@ class Missions extends CI_Controller {
             if ($game->fail > 2 || $game->success > 2) {
                 // remove the game and return to the homepage
                 $game->state = "game-over";
+                Game::save($game, $games_list);
                 $this->session->set_flashdata('error', 'Thank you for playing');
                 redirect('/', 'location'); 
                 return;
