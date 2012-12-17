@@ -16,7 +16,7 @@
             
             <?php if ($player->role == "Rebel Spy") { ?>
                 <p>Other Rebel Spies: <?php foreach ($spies as $spy) { ?>
-                <?php if ($spy->slug != $player->slug) { echo $spy->name; } ?>
+                <?php if ($spy->slug != $player->slug) { echo player_label($spy->name); } ?>
                 <?php } ?></p>                
             <?php } else { ?>
                 <p>Note: Rebel Spies will know who each other are!</p>
