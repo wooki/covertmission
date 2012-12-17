@@ -37,7 +37,7 @@ class Missions extends CI_Controller {
         // when players initially arrive update their state, depending if they
         // are onthe mission or not, if they post the acknowledgement then change to that
         $postback = $this->input->post('postback');
-        if ($postback == "acknowledge" && $player->state = 'mission-result') {
+        if ($postback == "acknowledge") {
             $player->state = 'mission-result-acknowledge';
         } else {
             $player->state = 'mission-result';  
