@@ -12,10 +12,10 @@
 
     <div class="row">
 
-        <div class="span1 offset4 game-cmd">
+        <div class="span2 offset4 game-cmd">
             <a class="btn btn-primary btn-large" href="/games/create">New Game</a>
         </div>
-        <div class="span1 offset2 game-cmd">
+        <div class="span2 game-cmd">
             <a class="btn btn-primary btn-large" href="/games">Join</a>
         </div>
 
