@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 // display the players role in a twitter bootstrap label
 if ( ! function_exists('player_role')) {
