@@ -61,14 +61,6 @@ class Games extends CI_Controller {
             $leader_key = array_rand($game->players, 1);
             $game->players[$leader_key]->leader = true;
 
-            // finally update the state, save and display game
-            $game->state = 'starting';
-            if (Game::save($game, $games_list) == false) {
-                $this->session->set_flashdata('error', 'Error saving game');
-                redirect('/', 'location');
-                return;
-            }
-
             // load current player
             $guid = $this->session->userdata('player_id');
             $player = Game::get_player($game, $guid);
@@ -81,7 +73,16 @@ class Games extends CI_Controller {
 
             $player->state = 'starting';
             Game::update_player($game, $player);
+            
+            // finally update the state, save and display game
+            $game->state = 'starting';
+            if (Game::save($game, $games_list) == false) {
+                $this->session->set_flashdata('error', 'Error saving game');
+                redirect('/', 'location');
+                return;
+            }
 
+            
             // set view data
             $this->view_data = array(
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
@@ -110,7 +111,16 @@ class Games extends CI_Controller {
 
             $player->state = 'starting';
             Game::update_player($game, $player);
+            
+            // finally update the state, save and display game
+            $game->state = 'starting';
+            if (Game::save($game, $games_list) == false) {
+                $this->session->set_flashdata('error', 'Error saving game');
+                redirect('/', 'location');
+                return;
+            }
 
+            
             // set view data
             $this->view_data = array(
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
