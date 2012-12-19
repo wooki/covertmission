@@ -1,12 +1,12 @@
 <?php
 class Game_List {
-    
+
     var $games = array();
     var $games_list_file_path = './data/games.json';
-    
+
     // load from disc, from json file
-    function load() {        
-        
+    function load() {
+
         // check for file - and create an empty file if one doesn't exist
         $json_data = read_file($this->games_list_file_path);
         if ($json_data != false) {
@@ -19,8 +19,8 @@ class Game_List {
     function save() {
         $json_data = json_encode($this->games);
         return write_file($this->games_list_file_path, $json_data, 'w');
-    }    
-    
+    }
+
     function update_game($game) {
         $updated = false;
         foreach ($this->games as &$g) {
@@ -34,10 +34,10 @@ class Game_List {
         }
         return $this->save();
     }
-    
+
     // get the specified game
     function get_game($slug) {
-    
+
         $exists = false;
         foreach ($this->games as $game) {
             if ($slug == $game->slug) {
@@ -48,12 +48,12 @@ class Game_List {
     }
     // check if the specified item exists in the collection
     function game_exists($name, $slug) {
-    
+
         $exists = false;
         foreach ($this->games as $game) {
             if ($name == $game->name ||
                 $slug == $game->slug) {
-                
+
                 return true;
             }
         }

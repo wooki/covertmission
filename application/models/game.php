@@ -1,6 +1,6 @@
 <?php
 class Game {
-    
+
     var $slug = '';
     var $name = '';
     var $state = '';
@@ -11,42 +11,43 @@ class Game {
     var $success = 0;
     var $fail = 0;
     var $last_mission = false;
-    
+    var $updated = date(DateTime::ATOM);
+
     // work out the correct url for viewing this game
     static function get_url_for_state($state, $slug) {
         if ($state == 'joining') {
-            return '/games/lobby/'.$slug; 
+            return '/games/lobby/'.$slug;
         } else if ($state == 'starting') {
-            return '/games/start/'.$slug; 
+            return '/games/start/'.$slug;
         } else if ($state == 'mission-selection') {
-            return '/missions/selection/'.$slug; 
+            return '/missions/selection/'.$slug;
         } else if ($state == 'mission-approve') {
-            return '/missions/approve/'.$slug; 
+            return '/missions/approve/'.$slug;
         } else if ($state == 'mission-vote') {
-            return '/missions/vote/'.$slug; 
+            return '/missions/vote/'.$slug;
         } else if ($state == 'mission-vote-acknowledge') {
-            return '/missions/vote/'.$slug; 
+            return '/missions/vote/'.$slug;
         } else if ($state == 'mission-execute') {
-            return '/missions/execute/'.$slug; 
+            return '/missions/execute/'.$slug;
         } else if ($state == 'mission-result') {
-            return '/missions/result/'.$slug; 
+            return '/missions/result/'.$slug;
         } else if ($state == 'game-over') {
-            return '/'; 
+            return '/';
         } else {
             return false;
-        }    
+        }
     }
-    
+
     // util for calling the above function
     static function get_url($game) {
         return Game::get_url_for_state($game->state, $game->slug);
     }
-    
+
     // work out how many spies there should be
     static function how_many_spies($game) {
         return round(count($game->players) * 0.33);
     }
-    
+
     // work out how many agents there should be
     static function how_many_agents($game, $mission_index) {
         $agents = array(
@@ -58,7 +59,7 @@ class Game {
         );
         return $agents[$mission_index][count($game->players)-5];
     }
-    
+
     // work out how many fail cards are required
     static function how_many_fails($game, $mission_index) {
         $agents = array(
@@ -66,18 +67,19 @@ class Game {
             array(1, 1, 1, 1, 1, 1),
             array(1, 1, 1, 1, 1, 1),
             array(1, 1, 2, 2, 2, 2),
-            array(1, 1, 1, 1, 1, 1)            
+            array(1, 1, 1, 1, 1, 1)
         );
         return $agents[$mission_index][count($game->players)-5];
     }
-    
+
     // load from disc, from json file
     static function load($slug, $game_list) {
-        return $game_list->get_game($slug);        
+        return $game_list->get_game($slug);
     }
 
     // save to disc, as json
     static function save($game, $game_list) {
+        $this->updated = date(DateTime::ATOM);
         return $game_list->update_game($game);
     }
 
@@ -87,13 +89,13 @@ class Game {
         $g->name = $name;
         $g->admin_name = $admin_name;
         $g->slug = Game::generate_slug($g->name);
-        $g->state = "joining"; 
+        $g->state = "joining";
         $g->success = 0;
         $g->fail = 0;
         $g->last_mission = false;
         return $g;
     }
-    
+
     // record mission success and move state, plus ready
     // for next mission
     static function mission_success($game) {
@@ -104,7 +106,7 @@ class Game {
         $game->current_team = 0;
         $game->current_mission++;
     }
-    
+
     // record mission fail and move state, plus ready
     // for next mission
     static function mission_fail($game) {
@@ -113,16 +115,16 @@ class Game {
         $game->last_mission = "Fail";
         Game::next_team($game); // reset team and next leader
         $game->current_team = 0;
-        $game->current_mission++;        
+        $game->current_mission++;
     }
-    
+
     // start mission, resets votes but thats it
     static function start_mission($game) {
         foreach ($game->players as &$player) {
             $player->vote = false;
         }
     }
-    
+
     // next team number, reset votes and new leader
     static function next_team($game) {
         $game->current_team++;
@@ -142,14 +144,14 @@ class Game {
             $player->vote = false;
             $player->state = $game->state;
         }
-        
+
         // if we have still got the current leader then set to 1st player
         if ($current_leader == true) {
             $game->players[0]->leader = true;
         }
-        
+
     }
-    
+
     // gets the player data for the specified guid, returns false if not found
     static function get_player($game, $guid) {
         foreach ($game->players as $player) {
@@ -159,7 +161,7 @@ class Game {
         }
         return false;
     }
-    
+
     // check if all players have voted and return vote result
     static function check_mission_vote($game) {
         $not_voted = 0;
@@ -185,7 +187,7 @@ class Game {
             return "Success";
         }
     }
-    
+
     // check if all players have voted and return vote result
     static function check_team_vote($game) {
         $not_voted = 0;
@@ -208,7 +210,7 @@ class Game {
             return "Rejected";
         }
     }
-    
+
     // check if all players are in the specified state
     static function all_players_state($game, $state) {
         foreach ($game->players as $player) {
@@ -218,7 +220,7 @@ class Game {
         }
         return true;
     }
-    
+
     // set current team
     static function set_team($game, $team) {
         foreach ($game->players as &$player) {
@@ -233,29 +235,29 @@ class Game {
         }
         return false;
     }
-    
+
     // get team
     static function get_team($game) {
         $team = array();
         foreach ($game->players as $player) {
             if ($player->team === true) {
-                $team[] = $player;                
+                $team[] = $player;
             }
         }
         return $team;
     }
-    
+
     // get spies
     static function get_spies($game) {
         $spies = array();
         foreach ($game->players as $player) {
             if ($player->role === "Rebel Spy") {
-                $spies[] = $player;                
+                $spies[] = $player;
             }
         }
         return $spies;
     }
-    
+
     // get leader
     static function get_leader($game) {
         foreach ($game->players as $player) {
@@ -265,7 +267,7 @@ class Game {
         }
         return false;
     }
-    
+
     // update an existing player with new data
     static function update_player($game, $player) {
         foreach ($game->players as &$p) {
@@ -281,7 +283,7 @@ class Game {
             }
         }
     }
-    
+
     // add a player to the game, returning a random guid for mapping
     // that players requests to this player in the game
     static function add_player($game, $name) {
@@ -309,11 +311,11 @@ class Game {
             return $guid;
         }
     }
-    
+
     // generate a slug for the game
     static function generate_slug($name) {
         $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $name);
-        return $slug;        
+        return $slug;
     }
 
 }

@@ -38,7 +38,7 @@
             to complete the mission. Rebel Spies will try to saboutage the mission. This is done simply by
             voting for mission success or failure.</p>
 
-            <p>You must complete 3 our of the 5 missions that you will be set to win the game.</p>
+            <p>The first side to win three missions wins the game. Good luck!</p>
 
 
         </div>
