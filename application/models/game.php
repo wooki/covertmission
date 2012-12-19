@@ -79,7 +79,7 @@ class Game {
 
     // save to disc, as json
     static function save($game, $game_list) {
-        $this->updated = date(DateTime::ATOM);
+        $game->updated = date(DateTime::ATOM);
         return $game_list->update_game($game);
     }
 
