@@ -11,7 +11,7 @@ class Game {
     var $success = 0;
     var $fail = 0;
     var $last_mission = false;
-    var $updated = date(DateTime::ATOM);
+    var $updated = '';
 
     // work out the correct url for viewing this game
     static function get_url_for_state($state, $slug) {
@@ -93,6 +93,7 @@ class Game {
         $g->success = 0;
         $g->fail = 0;
         $g->last_mission = false;
+        $g->updated = date(DateTime::ATOM);
         return $g;
     }
 
