@@ -6,6 +6,7 @@ class Missions extends CI_Controller {
     public function result($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         // load the game
         $this->load->helper('form');
@@ -92,6 +93,7 @@ class Missions extends CI_Controller {
     public function execute($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         // load the game
         $this->load->helper('form');
@@ -188,6 +190,7 @@ class Missions extends CI_Controller {
     public function vote($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         // load the game
         $this->load->helper('form');
@@ -286,6 +289,7 @@ class Missions extends CI_Controller {
     public function approve($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         // load the game
         $this->load->helper('form');
@@ -380,6 +384,7 @@ class Missions extends CI_Controller {
     public function selection($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         // load the game
         $this->load->helper('form');

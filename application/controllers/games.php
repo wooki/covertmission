@@ -3,6 +3,7 @@ class Games extends CI_Controller {
 
     public function index() {
 
+        nocache($this->output);
         $this->load->model(array('game_list', 'game'));
         $games_list = new Game_List();
         $games_list->load();
@@ -26,7 +27,8 @@ class Games extends CI_Controller {
     public function start($slug=false) {
 
         if ($slug == false) { show_404('page'); }
-
+        nocache($this->output);
+        
         // load the game
         $this->load->helper('form');
         $this->load->model(array('game_list', 'game'));
@@ -136,6 +138,7 @@ class Games extends CI_Controller {
     public function join($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         $message = false;
 
@@ -214,6 +217,7 @@ class Games extends CI_Controller {
     public function lobby($slug=false) {
 
         if ($slug == false) { show_404('page'); }
+        nocache($this->output);
 
         // load the game
         $this->load->helper('form');
@@ -260,6 +264,7 @@ class Games extends CI_Controller {
         $this->load->model(array('game_list', 'game'));
         $games_list = new Game_List();
         $games_list->load();
+        nocache($this->output);
 
         if ($this->input->post('postback') === false) {
             $game = Game::create('', '');
