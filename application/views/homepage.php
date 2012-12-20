@@ -25,12 +25,11 @@
 
       <div class="span4 offset4">
 
-            <h2>Gameplay</h2>
-            <h3><i class="icon-ok"></i>You are Imperial or Rebel</h3>
-            <h3><i class="icon-ok"></i>Team leader picks a team</h3>
-            <h3><i class="icon-ok"></i>Accept/Reject the team</h3>
-            <h3><i class="icon-ok"></i>Team vote on success of mission</h3>
-            <h3><i class="icon-ok"></i>First side to get 3 wins</h3>
+            <h4>You are Imperial or Rebel</h3>
+            <h4>Team leader picks a team</h3>
+            <h4>Accept/Reject the team</h3>
+            <h4>Team vote on success of mission</h3>
+            <h4>First side to get 3 wins</h3>
 
             <p><a class="btn" href="/about">More Info</a></p>
 
