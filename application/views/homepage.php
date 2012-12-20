@@ -33,7 +33,7 @@
             <li>First side to get 3 wins</li>
             </ul>
 
-            <a class="btn btn-primary btn-large" href="/about">More Info</a>
+            <p><a class="btn btn-primary" href="/about">More Info</a></p>
 
 
         </div>
