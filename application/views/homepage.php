@@ -25,13 +25,16 @@
 
       <div class="span4 offset4">
 
-            <p style="text-align: center;">You are Imperial or Rebel</p>
+            <div class="well">
+            <p style="text-align: center;">You are an <?= player_role('Imperial Officer') ?> or a <?= player_role('Rebel Spy') ?></p>
             <p style="text-align: center;">Team leader picks a team</p>
             <p style="text-align: center;">Accept/Reject the team</p>
             <p style="text-align: center;">Team vote on success of mission</p>
             <p style="text-align: center;">First side to get 3 wins</p>
 
             <p style="text-align: center;"><a class="btn" href="/about">More Info</a></p>
+
+            </div>
 
         </div>
     </div>
