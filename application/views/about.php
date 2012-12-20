@@ -27,20 +27,10 @@
 
             <p>The first side to win three missions wins the game. Good luck!</p>
 
-            <p><a href="/">Return to homepage</a></p>
+            <p><a class="btn" href="/">Return to homepage</a></p>
         </div>
     </div>
 
-    <div class="row">
-
-        <div class="span2 offset4 game-cmd">
-            <a class="btn btn-primary btn-large" href="/games/create">New Game</a>
-        </div>
-        <div class="span2 game-cmd">
-            <a class="btn btn-primary btn-large" href="/games">Join</a>
-        </div>
-
-    </div>
 
 </div>
 
