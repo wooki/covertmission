@@ -25,12 +25,12 @@
 
       <div class="span4 offset4">
 
-            <ul class="inline">
-            <li>You are Imperial or Rebel</li>
-            <li>Team leader picks a team</li>
-            <li>Accept/Reject the team</li>
-            <li>Team vote on success of mission</li>
-            <li>First side to get 3 wins</li>
+            <ul class="unstyled">
+            <li><i class="icon-ok"></i>You are Imperial or Rebel</li>
+            <li><i class="icon-ok"></i>Team leader picks a team</li>
+            <li><i class="icon-ok"></i>Accept/Reject the team</li>
+            <li><i class="icon-ok"></i>Team vote on success of mission</li>
+            <li><i class="icon-ok"></i>First side to get 3 wins</li>
             </ul>
 
             <p style="text-align: center;"><a class="btn" href="/about">More Info</a></p>
