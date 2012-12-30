@@ -6,7 +6,7 @@ class Api extends CI_Controller {
 
         if ($slug == false) { show_404('page'); }
         nocache($this->output);
-        
+
         $game = $this->_load_game($slug);
         if ($game != false) {
 
@@ -26,12 +26,10 @@ class Api extends CI_Controller {
             $guid = $this->session->userdata('player_id');
             $player = Game::get_player($game, $guid);
 
-            if ($player != false) {
-            }
-
             // special case to ensure players have to manually move past
             // the role assignment page
             if ($game->state == "starting" &&
+                $player->state == "joining" &&
                 Game::all_players_state($game, 'joining') == false) {
                 $game_url = '';
             } else if ($game->state == "mission-selection" &&
