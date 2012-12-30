@@ -47,8 +47,8 @@ class Games extends CI_Controller {
             // first player sets up the data
             if (Game::all_players_state($game, 'joining')) {
                 // default to imperial
-                foreach ($game->players as &$player) {
-                    $player->role = "Imperial Officer";
+                foreach ($game->players as &$p1) {
+                    $p1->role = "Imperial Officer";
                 }
 
                 // assign spies
