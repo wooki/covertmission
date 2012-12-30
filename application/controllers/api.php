@@ -31,7 +31,7 @@ class Api extends CI_Controller {
             if ($game->state == "starting" &&
                 $player->state == "joining" &&
                 Game::all_players_state($game, 'joining') == false) {
-                $game_url = '';
+                $game_url = Game::get_url($game);
             } else if ($game->state == "mission-selection" &&
                        $player->state == "mission-approve") {
                 $game_url = Game::get_url_for_state("mission-approve", $game->slug);
