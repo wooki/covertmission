@@ -28,7 +28,7 @@ class Games extends CI_Controller {
 
         if ($slug == false) { show_404('page'); }
         nocache($this->output);
-        
+
         // load the game
         $this->load->helper('form');
         $this->load->model(array('game_list', 'game'));
@@ -43,23 +43,25 @@ class Games extends CI_Controller {
         }
 
         if ($game->state == 'joining') {
+
             // first player sets up the data
+            if (Game::all_players_state($game, 'joining')) {
+                // default to imperial
+                foreach ($game->players as &$player) {
+                    $player->role = "Imperial Officer";
+                }
 
-            // default to imperial
-            foreach ($game->players as &$player) {
-                $player->role = "Imperial Officer";
+                // assign spies
+                $spy_count = Game::how_many_spies($game);
+                $spy_keys = array_rand($game->players, $spy_count);
+                foreach ($spy_keys as $spy_key) {
+                    $game->players[$spy_key]->role = "Rebel Spy";
+                }
+
+                // assign a random leader
+                $leader_key = array_rand($game->players, 1);
+                $game->players[$leader_key]->leader = true;
             }
-
-            // assign spies
-            $spy_count = Game::how_many_spies($game);
-            $spy_keys = array_rand($game->players, $spy_count);
-            foreach ($spy_keys as $spy_key) {
-                $game->players[$spy_key]->role = "Rebel Spy";
-            }
-
-            // assign a random leader
-            $leader_key = array_rand($game->players, 1);
-            $game->players[$leader_key]->leader = true;
 
             // load current player
             $guid = $this->session->userdata('player_id');
@@ -73,7 +75,7 @@ class Games extends CI_Controller {
 
             $player->state = 'starting';
             Game::update_player($game, $player);
-            
+
             // finally update the state, save and display game
             $game->state = 'starting';
             if (Game::save($game, $games_list) == false) {
@@ -82,7 +84,7 @@ class Games extends CI_Controller {
                 return;
             }
 
-            
+
             // set view data
             $this->view_data = array(
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
@@ -111,7 +113,7 @@ class Games extends CI_Controller {
 
             $player->state = 'starting';
             Game::update_player($game, $player);
-            
+
             // finally update the state, save and display game
             $game->state = 'starting';
             if (Game::save($game, $games_list) == false) {
@@ -120,7 +122,7 @@ class Games extends CI_Controller {
                 return;
             }
 
-            
+
             // set view data
             $this->view_data = array(
                 'title' => $game->name.' Role Assignment - Covert Mission - Group game with a star wars theme',
