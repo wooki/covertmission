@@ -1,5 +1,5 @@
 var covertmission = function() {
-    
+
     // get a description of game statis
     function get_state_description(state) {
         if (state == 'joining') {
@@ -9,7 +9,7 @@ var covertmission = function() {
         } else if (state == 'mission-selection') {
             return 'Waiting for team leader';
         } else if (state == 'mission-approve') {
-            return 'Waiting for player votes';            
+            return 'Waiting for player votes';
         } else if (state == 'mission-vote') {
             return 'Mission vote complete';
         } else if (state == 'mission-vote-acknowledge') {
@@ -24,17 +24,17 @@ var covertmission = function() {
             return 'Unknown state: '+state;
         }
     }
-    
+
     // do things at startup
     $(document).ready(function() {
-        
-        // set the background depending on player role        
+
+        // set the background depending on player role
         if ($('.player[data-role]').length) {
             if ($('.player').attr('data-role') == "Imperial Officer") {
                 $.backstretch("/img/texture-empire.jpg");
             } else {
                 $.backstretch("/img/texture-rebel.jpg");
-            }            
+            }
         } else {
             $.backstretch("/img/texture-empire.jpg");
         }
@@ -44,12 +44,12 @@ var covertmission = function() {
                 $.backstretch("/img/imperial-bg.jpg");
             } else {
                 $.backstretch("/img/rebels-bg.jpg");
-            }            
+            }
         } else {
             $.backstretch("/img/bg.jpg");
         }
         */
-        // execute requires one of approve/reject button 
+        // execute requires one of approve/reject button
         $('form.execute').submit(function(event) {
             var selected_count = $('.btn-group button.active').length;
             if (selected_count != 1) {
@@ -58,11 +58,11 @@ var covertmission = function() {
             } else {
                 $('.btn-group button.active').each(function(key, item) {
                     $('input[name=execute]').val($(item).text());
-                });                
+                });
             }
         });
-        
-        // vote requires one of approve/reject button 
+
+        // vote requires one of approve/reject button
         $('form.vote').submit(function(event) {
             var selected_count = $('.btn-group button.active').length;
             if (selected_count != 1) {
@@ -71,10 +71,10 @@ var covertmission = function() {
             } else {
                 $('.btn-group button.active').each(function(key, item) {
                     $('input[name=vote]').val($(item).text());
-                });                
+                });
             }
         });
-        
+
         // set team - require team leader to set correct number of players
         // and keeps the hidden field updated
         $('form.set-team').submit(function(event) {
@@ -90,14 +90,14 @@ var covertmission = function() {
                 $('input[name=team]').val($team_data.join('|'));
             }
         });
-        
+
         // lobby - refresh status every n seconds and update players
         if ($('.game_state').length) {
             // <p data-game-state="joining" class="alert alert-info game_state">Waiting to start</p>
             setInterval(function() {
-                
+
                 var $game_slug = $('body[data-game]').attr("data-game");
-                
+
                 $.ajax({
                    url: '/api/state/'+$game_slug,
                    error: function(xhr, textStatus, error) {
@@ -105,13 +105,13 @@ var covertmission = function() {
                    },
                    success: function(data, textStatus, xhr) {
                        var json_data = JSON.parse(data);
-                       $('.game_state').html(get_state_description(json_data['return']));                   
+                       $('.game_state').html(get_state_description(json_data['return']));
                        var player_html = '';
                        $(json_data['players']).each(function(key, item) {
                            player_html += '<span class="label label-info"><i class="icon-user icon-white"></i>'+item['name']+'</span> ';
                        });
                        $('.players').html(player_html);
-                       
+
                        // if we are admin and have enough players refresh lobby page - to reveal the start button
                        if ($('.admin_controls_waiting').length && $(json_data['players']).length >= 5) {
                            window.location.reload();
@@ -125,12 +125,12 @@ var covertmission = function() {
                        }
                    }
                 });
-                
+
                 $('.game_state')
-                
-            }, 5000);
+
+            }, 2000);
         }
-        
+
     });
 
 
