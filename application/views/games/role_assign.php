@@ -15,7 +15,7 @@
             <strong><?= player_role($player->role) ?></strong></p>
 
             <p style="text-align: center;">
-                <img src="/images/<?= $player->image ?>" height="100" width="100" />
+                <img src="/img/<?= $player->image ?>" height="100" width="100" />
             </p>
 
             <?php if ($player->role == "Rebel Spy") { ?>

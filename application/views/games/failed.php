@@ -19,7 +19,7 @@
             Well done:<div class="winners">
             <?php foreach ($game->players as $p) { ?>
             <?php if ($p->role == "Rebel Spy") { ?>
-            <img src="/images/<?= $p->image ?>" height="100" width="100" />
+            <img src="/img/<?= $p->image ?>" height="100" width="100" />
             <?= player_label($p->name) ?>
             <?php } ?>
             <?php } ?>
