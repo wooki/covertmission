@@ -41,6 +41,16 @@ class Games extends CI_Controller {
             redirect('/', 'location');
             return;
         }
+        
+        // load current player
+        $guid = $this->session->userdata('player_id');
+        $player = Game::get_player($game, $guid);
+
+        if ($player == false) {
+            $this->session->set_flashdata('error', 'You are not a player in that game');
+            redirect('/', 'location');
+            return;
+        }
 
         // set view data
         $this->view_data = array(
@@ -48,8 +58,6 @@ class Games extends CI_Controller {
             'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
             'game' => $game,
             'player' => $player,
-            'leader' => Game::get_leader($game),
-            'team' => Game::get_team($game),
             'game_name' => $game->slug
         );
 
