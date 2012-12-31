@@ -188,10 +188,6 @@ echo "<br />player: ".$p1->slug." ".$p1->vote." ".$p1->state;
                 $not_voted++;
             }
         }
-echo "<br />not_voted: ".$not_voted;
-echo "<br />voted_yes: ".$voted_yes;
-echo "<br />voted_no: ".$voted_no;
-echo "<br />required_fails: ".$required_fails;
         if ($not_voted > 0) {
             return "Incomplete";
         } else if ($voted_no >= $required_fails) {

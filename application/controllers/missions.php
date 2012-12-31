@@ -131,7 +131,6 @@ class Missions extends CI_Controller {
                 $player->state = 'mission-execute';
             }
         }
-echo "<br />State: ".$player->state;
 
         // if we have a mission execute player and a postback
         // see what they have voted.
@@ -147,8 +146,6 @@ echo "<br />State: ".$player->state;
 
         // check success/fail
         $vote_result = Game::check_mission_vote($game);
-echo "<br />Player: ".$player->vote;
-echo "<br />Vote: ".$vote_result;
 
         // when all players have acknowledged we redirect top relevant step
         if ($vote_result == "Success") {
