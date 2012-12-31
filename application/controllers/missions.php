@@ -247,7 +247,7 @@ echo $game->current_team."<br />";
             Game::save($game, $games_list); // save before redirect
 echo $game->current_team."<br />";
 //            redirect(Game::get_url($game));
-echo print_r(game, true)."<br />";
+echo print_r($game, true)."<br />";
 echo $game->current_team."<br />";
             return;
 
@@ -423,12 +423,14 @@ echo $game->current_team."<br />";
         }
 
         // when the first person hits this page set the mission index
+echo $game->current_team."<br />";
         if ($game->current_mission == false) {
             $game->current_mission = 0;
             $game->current_team = 0;
         } else if ($game->current_team == false) {
             $game->current_team = 0;
         }
+echo $game->current_team."<br />";
 
         // when the last player reaches this point update game status
         if (Game::all_players_state($game, 'mission-selection') == true) {
