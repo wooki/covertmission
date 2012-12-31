@@ -131,6 +131,8 @@ class Missions extends CI_Controller {
                 $player->state = 'mission-execute';
             }
         }
+echo "State: ".$player->state;
+return;
 
         // if we have a mission execute player and a postback
         // see what they have voted.
@@ -249,10 +251,11 @@ class Missions extends CI_Controller {
 
            } else if ($vote_result == "Approved") {
             // success - go to mission
+echo "APPROVED";
             $game->state = "mission-execute";
             Game::start_mission($game);
             Game::save($game, $games_list); // save before redirect
-            redirect(Game::get_url($game));
+//            redirect(Game::get_url($game));
             return;
 
            } else {
