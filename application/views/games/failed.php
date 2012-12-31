@@ -25,14 +25,9 @@
             <?php } ?>
             </div>
 
-            <?php if ($player->state == 'mission-result') {  ?>
-            <?= form_open('missions/result/'.$game->slug) ?>
-                <?= form_hidden('postback', 'acknowledge'); ?>
-                <button type="submit" class="btn btn-primary btn-large">Continue</button>
-            </form>
-            <?php } else {  ?>
-            <p>Please wait for all players</p>
-            <?php } ?>
+            <?= form_open('/') ?>
+            <button type="submit" class="btn btn-primary btn-large">Continue</button>
+            </form>            
         </div>
 
     </div>
