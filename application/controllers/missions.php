@@ -418,14 +418,12 @@ class Missions extends CI_Controller {
         }
 
         // when the first person hits this page set the mission index
-echo $game->current_team."<br />";
         if ($game->current_mission === false) {
             $game->current_mission = 0;
             $game->current_team = 0;
         } else if ($game->current_team === false) {
             $game->current_team = 0;
         }
-echo $game->current_team."<br />";
 
         // when the last player reaches this point update game status
         if (Game::all_players_state($game, 'mission-selection') == true) {
