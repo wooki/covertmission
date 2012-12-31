@@ -184,6 +184,8 @@ echo "<br />player: ".$p1->slug." ".$p1->vote." ".$p1->state;
                 } else {
                     $not_voted++;
                 }
+            } else if ($p1->state == "mission-vote-acknowledge") {
+                $not_voted++;
             }
         }
 echo "<br />not_voted: ".$not_voted;
