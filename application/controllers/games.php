@@ -83,7 +83,7 @@ class Games extends CI_Controller {
             if (Game::all_players_state($game, 'joining')) {
                 
                 // randomize two lists of images to use
-                $empire_images = rray('01', '02', '03', '04', '05', '06', '07', '08', '09', '01');
+                $empire_images = array('01', '02', '03', '04', '05', '06', '07', '08', '09', '01');
                 $rebel_images = array('01', '02', '03', '04', '05', '06', '07', '08', '09');
                 shuffle($empire_images);
                 shuffle($rebel_images);
