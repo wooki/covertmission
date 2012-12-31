@@ -175,6 +175,7 @@ class Game {
         $voted_no = 0;
         $required_fails = Game::how_many_fails($game, $game->current_mission);
         foreach ($game->players as $p1) {
+echo "<br />player: ".$p1->slug." ".$p1->vote;
             if ($p1->state == "mission-execute") {
                 if ($p1->vote == "Succeed") {
                     $voted_yes++;
@@ -185,6 +186,10 @@ class Game {
                 }
             }
         }
+echo "<br />not_voted: ".$not_voted;
+echo "<br />voted_yes: ".$voted_yes;
+echo "<br />voted_no: ".$voted_no;
+echo "<br />required_fails: ".$required_fails;
         if ($not_voted > 0) {
             return "Incomplete";
         } else if ($voted_no >= $required_fails) {
