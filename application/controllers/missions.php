@@ -397,7 +397,7 @@ class Missions extends CI_Controller {
             $this->session->set_flashdata('error', 'Game does not exist');
             redirect('/', 'location');
             return;
-        } else if ($game->state != 'starting' || $game->state != 'mission-selection') {
+        } else if ($game->state != 'starting' && $game->state != 'mission-selection') {
             $this->session->set_flashdata('error', 'Game state has moved');
             redirect(Game::get_url($game), 'location');
             return;
