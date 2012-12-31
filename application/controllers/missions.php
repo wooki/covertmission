@@ -241,9 +241,14 @@ class Missions extends CI_Controller {
            } else if ($vote_result == "Rejected") {
             // fail - next team leader
             $game->state = "mission-selection";
+echo $game->current_team."<br />";
             Game::next_team($game);
+echo $game->current_team."<br />";
             Game::save($game, $games_list); // save before redirect
-            redirect(Game::get_url($game));
+echo $game->current_team."<br />";
+//            redirect(Game::get_url($game));
+echo print_r(game, true)."<br />";
+echo $game->current_team."<br />";
             return;
 
            } else if ($vote_result == "Approved") {
