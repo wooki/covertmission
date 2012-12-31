@@ -12,7 +12,7 @@ class Game {
     var $fail = 0;
     var $last_mission = false;
     var $updated = '';
-    
+
     // work out the correct url for viewing this game
     static function get_url_for_state($state, $slug) {
         if ($state == 'joining') {
@@ -28,6 +28,8 @@ class Game {
         } else if ($state == 'mission-vote-acknowledge') {
             return '/missions/vote/'.$slug;
         } else if ($state == 'mission-execute') {
+            return '/missions/execute/'.$slug;
+        } else if ($state == 'mission-watch') {
             return '/missions/execute/'.$slug;
         } else if ($state == 'mission-result') {
             return '/missions/result/'.$slug;
