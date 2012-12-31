@@ -12,7 +12,7 @@ class Game {
     var $fail = 0;
     var $last_mission = false;
     var $updated = '';
-
+    
     // work out the correct url for viewing this game
     static function get_url_for_state($state, $slug) {
         if ($state == 'joining') {
@@ -45,7 +45,8 @@ class Game {
 
     // work out how many spies there should be
     static function how_many_spies($game) {
-        return round(count($game->players) * 0.33);
+        $spies = array(2, 2, 3, 3, 3, 4);
+        return $spies[count($game->players)-5];
     }
 
     // work out how many agents there should be
@@ -281,6 +282,7 @@ class Game {
                 $game->players[$key]->state = $player->state;
                 $game->players[$key]->team = $player->team;
                 $game->players[$key]->vote = $player->vote;
+                $game->players[$key]->image = $player->image;
             }
         }
     }
@@ -307,7 +309,8 @@ class Game {
                 'role' => '',
                 'state' => 'joining',
                 'team' => false,
-                'vote' => ''
+                'vote' => '',
+                'image' => 'empire_01.png'
             );
             return $guid;
         }

@@ -81,9 +81,20 @@ class Games extends CI_Controller {
 
             // first player sets up the data
             if (Game::all_players_state($game, 'joining')) {
+                
+                // randomize two lists of images to use
+                $empire_images = rray('01', '02', '03', '04', '05', '06', '07', '08', '09', '01');
+                $rebel_images = array('01', '02', '03', '04', '05', '06', '07', '08', '09');
+                shuffle($empire_images);
+                shuffle($rebel_images);
+                $empire_image_index = 0;
+                $rebel_image_index = 0;
+                
                 // default to imperial
                 foreach ($game->players as &$p1) {
                     $p1->role = "Imperial Officer";
+                    $p1->image = 'empire_'.$empire_images[$empire_image_index].'.png';
+                    $empire_image_index++;
                 }
 
                 // assign spies
@@ -91,6 +102,8 @@ class Games extends CI_Controller {
                 $spy_keys = array_rand($game->players, $spy_count);
                 foreach ($spy_keys as $spy_key) {
                     $game->players[$spy_key]->role = "Rebel Spy";
+                    $game->players[$spy_key]->image = 'empire_'.$rebel_images[$rebel_image_index].'.png';
+                    $rebel_image_index++;
                 }
 
                 // assign a random leader
