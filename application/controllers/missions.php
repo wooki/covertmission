@@ -235,9 +235,8 @@ class Missions extends CI_Controller {
 
            // fail 5th - Game Over
            if ($vote_result == "Rejected" && $game->current_team >= 4) {
-                $this->session->set_flashdata('error', 'TODO: Redirect to Game Over!');
-                redirect('/');
-
+                redirect('/games/failed/'.$game->slug);
+                return;
            } else if ($vote_result == "Rejected") {
             // fail - next team leader
             $game->state = "mission-selection";

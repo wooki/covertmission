@@ -22,7 +22,42 @@ class Games extends CI_Controller {
         $this->load->view('games/index', $this->view_data);
         $this->load->view('shared/_footer.php', $this->view_data);
 
-	}
+    }
+
+    public function failed($slug=false) {
+
+        if ($slug == false) { show_404('page'); }
+        nocache($this->output);
+
+        // load the game
+        $this->load->helper('form');
+        $this->load->model(array('game_list', 'game'));
+        $games_list = new Game_List();
+        $games_list->load();
+        $game = Game::load($slug, $games_list);
+
+        if ($game == false) {
+            $this->session->set_flashdata('error', 'Game does not exist');
+            redirect('/', 'location');
+            return;
+        }
+
+        // set view data
+        $this->view_data = array(
+            'title' => $game->name.' Mission '.$game->last_mission.' - Covert Mission - Group game with a star wars theme',
+            'description' => 'Covert Mission is a group game with a star wars theme based around player deception and deduction of player motives, in the same genre as werewolf and mafia.',
+            'game' => $game,
+            'player' => $player,
+            'leader' => Game::get_leader($game),
+            'team' => Game::get_team($game),
+            'game_name' => $game->slug
+        );
+
+        $this->load->view('shared/_header.php', $this->view_data);
+        $this->load->view('games/failed', $this->view_data);
+        $this->load->view('shared/_footer.php', $this->view_data);
+
+    }
 
     public function start($slug=false) {
 
