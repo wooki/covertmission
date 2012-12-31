@@ -102,7 +102,7 @@ class Games extends CI_Controller {
                 $spy_keys = array_rand($game->players, $spy_count);
                 foreach ($spy_keys as $spy_key) {
                     $game->players[$spy_key]->role = "Rebel Spy";
-                    $game->players[$spy_key]->image = 'empire_'.$rebel_images[$rebel_image_index].'.png';
+                    $game->players[$spy_key]->image = 'rebel_'.$rebel_images[$rebel_image_index].'.png';
                     $rebel_image_index++;
                 }
 
