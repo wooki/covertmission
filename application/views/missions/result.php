@@ -20,8 +20,8 @@
                 Well done:<div class="winners">
                 <?php foreach ($game->players as $p) { ?>
                 <?php if ($p->role == "Imperial Officer") { ?>
-                <img src="/img/<?= $p->image ?>" height="100" width="100" />
-                <?= player_label($p->name) ?>
+                <p><img src="/img/<?= $p->image ?>" height="100" width="100" />
+                <?= player_label($p->name) ?></p>
                 <?php } ?>
                 <?php } ?>
                 </div>
@@ -30,8 +30,8 @@
                 Well done:<div class="winners">
                 <?php foreach ($game->players as $p) { ?>
                 <?php if ($p->role == "Rebel Spy") { ?>
-                <img src="/img/<?= $p->image ?>" height="100" width="100" />
-                <?= player_label($p->name) ?>
+                <p><img src="/img/<?= $p->image ?>" height="100" width="100" />
+                <?= player_label($p->name) ?></p>
                 <?php } ?>
                 <?php } ?>
                 </div>

@@ -235,6 +235,8 @@ class Missions extends CI_Controller {
 
            // fail 5th - Game Over
            if ($vote_result == "Rejected" && $game->current_team >= 4) {
+                $game->state = "mission-failed";
+                Game::save($game, $games_list); // save before redirect
                 redirect('/games/failed/'.$game->slug);
                 return;
            } else if ($vote_result == "Rejected") {

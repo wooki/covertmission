@@ -31,6 +31,8 @@ class Game {
             return '/missions/execute/'.$slug;
         } else if ($state == 'mission-result') {
             return '/missions/result/'.$slug;
+        } else if ($state == 'mission-failed') {
+            return '/games/failed/'.$slug;
         } else if ($state == 'game-over') {
             return '/';
         } else {
