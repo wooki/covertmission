@@ -283,7 +283,7 @@ class Missions extends CI_Controller {
     }
 
 
-    // handle post from team leader of team
+    // handle post from last player from team
     // move to approve team state and await
     // player votes
     public function approve($slug=false) {
